@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex, nofollow, noarchive">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <script>var API_URL = "https://script.google.com/macros/s/AKfycbwAHnrMmYV9ENMzCnmo5ErtdRJCIIsZSdj9duoA5CExdhS5UW1ghAkIV8xa3kk7wv9E/exec";</script>
+    <script>var API_URL = "https://script.google.com/macros/s/AKfycbwpL6vz8TGgCkn7Tpreo47YMB1WTMDGD8o-kcO-Gj6tSToinZL1K_54T8WT5b9EtEHA/exec";</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -1469,8 +1469,11 @@ input,select{padding:9px 12px!important;font-size:13px!important;border-radius:1
 .lock-btn{border:0;background:rgba(255,255,255,.18);color:#fff;border-radius:999px;padding:4px 11px;font-size:10.5px;font-weight:800;font-family:inherit;cursor:pointer;margin-bottom:4px;display:inline-flex;align-items:center;gap:5px}
 .pend-btn{border:1.5px solid var(--jmd);background:var(--jmd-light);color:var(--jmd);border-radius:12px;height:38px;padding:0 14px;font-weight:800;font-size:12px;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
 .pend-btn:hover{background:var(--jmd);color:#fff}
+.pend-btn.wa-b{border-color:#16a34a;background:#dcfce7;color:#15803d}
+.pend-btn.wa-b:hover{background:#16a34a;color:#fff}
+@media(max-width:768px){.history-actions select{flex:1 1 45%;min-width:0}.history-actions .pend-btn.wa-b{flex:1 1 45%}}
 .history-actions{display:flex;gap:8px;flex-wrap:wrap}
-@media(max-width:768px){.history-actions{width:100%}.history-actions .pend-btn{flex:1 0 100%}}
+@media(max-width:768px){.history-actions{width:100%}.history-actions .pend-btn{flex:1 0 100%}.history-actions .pend-btn.wa-b{flex:1 1 45%}}
 /* ===== PENDING LIST ===== */
 .pd{border:1px solid var(--border);border-left:4px solid #ef4444;border-radius:14px;padding:10px 12px;background:#fff;display:flex;flex-direction:column;gap:6px}
 .pd-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
@@ -1494,7 +1497,7 @@ input,select{padding:9px 12px!important;font-size:13px!important;border-radius:1
 .pb-addr{height:65px;flex:none;background:#59013E;color:#fff;text-align:center;font-size:20.6px;font-weight:700;line-height:30px;display:flex;align-items:center;justify-content:center;padding:0 6px;position:relative;z-index:1;white-space:nowrap;letter-spacing:-.2px}
 .pb-cl{height:51px;flex:none;padding:0 48px;font-size:26.5px;font-weight:700;color:#0b4a6c;display:flex;align-items:center;white-space:nowrap;overflow:hidden}
 .pb-tbl{margin:0 47px 0 37px;min-height:206px;border:2px solid #111;border-radius:21px;padding:0 19px 8px;flex:none}
-.pb-th,.pb-row{display:grid;grid-template-columns:1fr 232px 236px;align-items:center}
+.pb-th,.pb-row{display:grid;grid-template-columns:1fr 120px 175px 195px;align-items:center}
 .pb-th{height:34px;font-size:17px;font-weight:700;text-align:center;border-bottom:1.5px solid #222}
 .pb-row{font-size:18.3px;font-weight:600;padding:9px 0 0}
 .pb-d{display:flex;gap:21px;padding-left:22px;text-align:left}
@@ -1695,6 +1698,154 @@ select{appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:point
  },true);
 })();
 </script>
+
+<style id="patch-css">
+.btn-custom{border:1.5px dashed var(--jmd);background:var(--jmd-light);color:var(--jmd);border-radius:12px;padding:7px 12px;font-weight:800;font-size:12px;font-family:inherit;cursor:pointer;white-space:nowrap}
+.btn-custom.wide{width:100%;padding:12px;font-size:13px;margin-top:8px;border-radius:16px}
+.ci-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.ci-chips button{border:1.5px solid var(--border);background:#f8fafc;border-radius:999px;padding:7px 14px;font-weight:700;font-size:12.5px;font-family:inherit;cursor:pointer;color:#334155}
+.ci-chips button:hover{border-color:var(--jmd);color:var(--jmd);background:var(--jmd-light)}
+.dropdown div.kb-active,.customer-dropdown div.kb-active{background:#fff1f5;color:var(--jmd)}
+.hc-mini{display:none}
+@media (max-width:768px){
+ .hist-grid{gap:8px}
+ .hc{cursor:pointer;padding:10px 12px;gap:6px}
+ .hc-nm{display:flex;justify-content:space-between;align-items:center;gap:10px}
+ .hc-nmL{min-width:0;flex:1}
+ .hc-mini{display:flex;align-items:center;gap:8px;font-size:15px;white-space:nowrap}
+ .hc-chev{font-size:11px;color:var(--muted);transition:transform .2s}
+ .hc.open .hc-chev{transform:rotate(180deg)}
+ .hc:not(.open) .hc-amt,.hc:not(.open) .hc-act{display:none}
+ .hc.open .hc-sub{white-space:normal}
+}
+</style>
+<style>
+/* Payment intelligence console — compact, tactile and mobile-first */
+.filter-console{position:relative;margin:2px 0 14px;padding:15px;border:1px solid #e7eaf1;border-radius:18px;background:linear-gradient(145deg,#fff 0%,#fbfcff 58%,#fff5f8 100%);box-shadow:0 12px 32px rgba(15,23,42,.06);overflow:hidden}
+.filter-console:after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;right:-85px;top:-95px;background:rgba(165,0,68,.08);pointer-events:none}
+.filter-console-head{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.filter-kicker{display:inline-flex;align-items:center;gap:6px;color:var(--jmd);font-size:9px;font-weight:900;letter-spacing:1.3px}
+.filter-console h3{font-size:15px;line-height:1.2;margin:3px 0;color:#172033;letter-spacing:-.25px}
+.filter-console p{font-size:10.5px;color:#718096;font-weight:650;margin:0}
+.filter-quick{display:flex;align-items:center;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.filter-quick button{height:34px;border:1px solid #e4e8f0;border-radius:10px;padding:0 11px;background:#fff;color:#64748b;font:800 10.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s ease,color .18s ease;white-space:nowrap}
+.filter-quick button:hover{transform:translateY(-1px);box-shadow:0 6px 14px rgba(15,23,42,.08)}
+.filter-quick button.active{background:#172033;color:#fff;border-color:#172033;box-shadow:0 6px 14px rgba(23,32,51,.2)}
+.filter-quick button[data-payquick="pending"].active{background:#dc2626;border-color:#dc2626;box-shadow:0 6px 14px rgba(220,38,38,.2)}
+.filter-quick button[data-payquick="paid"].active{background:#059669;border-color:#059669;box-shadow:0 6px 14px rgba(5,150,105,.2)}
+.filter-quick .top-pending{color:#a50044;border-color:rgba(165,0,68,.22);background:#fff4f7}
+.filter-quick .clear-filter{width:34px;padding:0;color:#94a3b8}
+.recovery-panel{position:relative;z-index:1;display:grid;grid-template-columns:auto minmax(120px,1fr) minmax(180px,auto);align-items:center;gap:12px;margin-top:13px;padding-top:12px;border-top:1px dashed #dfe4ec}
+.recovery-copy{display:flex;align-items:baseline;gap:8px;white-space:nowrap}.recovery-copy span,.recovery-lead span{font-size:9px;text-transform:uppercase;letter-spacing:.7px;color:#8a94a6;font-weight:900}.recovery-copy strong{font-size:18px;color:#059669;letter-spacing:-.7px}
+.recovery-track{height:8px;border-radius:99px;background:#e9eef4;overflow:hidden;box-shadow:inset 0 1px 2px rgba(15,23,42,.1)}.recovery-track i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#16a34a,#34d399);box-shadow:0 0 12px rgba(16,185,129,.35);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.recovery-lead{display:grid;grid-template-columns:auto auto;column-gap:8px;align-items:baseline;justify-content:end}.recovery-lead span{grid-column:1/-1;text-align:right}.recovery-lead strong{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#334155;font-size:11.5px}.recovery-lead b{font-size:13px;color:#dc2626}
+.history-select{border-color:#dde2eb!important;background-color:#fff!important}.history-select:focus{border-color:var(--jmd)!important;box-shadow:0 0 0 3px rgba(165,0,68,.08)!important}
+.stat-card{transition:transform .18s ease,box-shadow .18s ease!important}.stat-card:hover{transform:translateY(-2px)!important}
+@media(max-width:768px){.filter-console{padding:13px;margin-top:0}.filter-console-head{align-items:flex-start;flex-direction:column}.filter-quick{width:100%;display:grid;grid-template-columns:repeat(3,1fr)}.filter-quick button{padding:0 5px}.filter-quick .top-pending{grid-column:span 2}.filter-quick .clear-filter{width:auto}.recovery-panel{grid-template-columns:auto 1fr;gap:8px 10px}.recovery-lead{grid-column:1/-1;display:flex;justify-content:flex-start;gap:6px}.recovery-lead span{text-align:left}.recovery-lead strong{max-width:42vw}.history-actions .pend-btn.wa-b{flex:1 1 100%!important}}
+@media(prefers-reduced-motion:reduce){.filter-quick button,.recovery-track i,.stat-card{transition:none!important}}
+</style>
+<style>
+/* =====================================================
+   INVOICE COMMAND CENTER v2 — responsive visual system
+===================================================== */
+.history-card{padding:0!important;border-radius:26px!important;overflow:hidden!important;background:#f7f8fb!important;border:1px solid rgba(255,255,255,.9)!important;box-shadow:0 24px 70px rgba(35,24,45,.11)!important}
+.history-top{position:relative;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:24px!important;min-height:142px;margin:0!important;padding:24px 28px 44px!important;background:radial-gradient(circle at 84% -20%,rgba(255,255,255,.15),transparent 34%),linear-gradient(122deg,#1b1421 0%,#341426 48%,#74113b 100%);color:#fff;overflow:hidden}
+.history-top:before{content:"";position:absolute;left:-55px;bottom:-92px;width:210px;height:210px;border:1px solid rgba(255,255,255,.08);border-radius:50%;box-shadow:0 0 0 30px rgba(255,255,255,.025),0 0 0 60px rgba(255,255,255,.018)}
+.history-heading{position:relative;z-index:1;display:flex;align-items:center;gap:15px;min-width:0}.history-mark{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;flex:none;background:linear-gradient(145deg,#ff267a,#a50044);box-shadow:0 10px 26px rgba(255,0,102,.28),inset 0 1px 0 rgba(255,255,255,.28);font-size:20px}.history-heading>div:last-child{min-width:0}.history-eyebrow{display:block;color:#ffadc9;font-size:9px;line-height:1;font-weight:900;letter-spacing:1.8px;margin-bottom:6px}.history-heading h2{margin:0!important;color:#fff;font-size:24px;line-height:1.08;font-weight:900;letter-spacing:-.7px}.history-heading p{margin:6px 0 0;color:rgba(255,255,255,.62);font-size:11px;font-weight:600}
+.history-head-actions{position:relative;z-index:1;display:flex;gap:8px;align-items:center}.head-action{height:42px;border-radius:13px;padding:0 14px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.09);color:#fff;font:800 11px 'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;backdrop-filter:blur(10px);transition:.18s}.head-action:hover{transform:translateY(-2px);background:rgba(255,255,255,.15)}.head-action.dues{background:#fff;color:#8e103f;border-color:#fff;box-shadow:0 10px 24px rgba(0,0,0,.16)}.head-action.dues b{font-size:7.5px;letter-spacing:.7px;padding:3px 5px;border-radius:5px;background:#fff0f5;color:#b1124e}
+.filter-deck{position:relative;z-index:3;display:grid;grid-template-columns:minmax(220px,1.05fr) minmax(500px,2.35fr) auto;align-items:end;gap:12px;margin:-25px 18px 12px;padding:15px;background:rgba(255,255,255,.96);border:1px solid #e9e8ee;border-radius:18px;box-shadow:0 14px 36px rgba(23,16,30,.11)}
+.filter-deck label{margin:0}.filter-search>label,.filter-field>span{display:block;margin:0 0 6px 2px;color:#8a8490;font-size:8.5px;font-weight:900;letter-spacing:1.05px;text-transform:uppercase}.search-control{position:relative}.search-control>i{position:absolute;left:15px;top:50%;width:13px;height:13px;transform:translateY(-50%);border:2px solid #9b93a0;border-radius:50%;pointer-events:none}.search-control>i:after{content:"";position:absolute;width:6px;height:2px;background:#9b93a0;right:-5px;bottom:-2px;transform:rotate(45deg);border-radius:2px}.history-input{width:100%!important;height:44px!important;padding:0 14px 0 40px!important;border:1px solid #e3e0e7!important;border-radius:12px!important;background:#f7f6f8!important;color:#251c29!important;font-size:12px!important;box-shadow:none!important}.history-input:focus{background:#fff!important;border-color:#a50044!important;box-shadow:0 0 0 3px rgba(165,0,68,.08)!important}
+.filter-selects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.filter-field{min-width:0}.history-select{width:100%!important;height:44px!important;padding:0 34px 0 12px!important;border:1px solid #e3e0e7!important;border-radius:12px!important;background-color:#fff!important;color:#302635!important;font-size:11.5px!important;font-weight:750!important;box-shadow:none!important;cursor:pointer;text-overflow:ellipsis}
+.filter-reports{display:grid;grid-template-columns:repeat(2,105px);gap:7px}.report-btn{height:44px;border:0;border-radius:12px;padding:0 10px;display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;transition:.18s;box-shadow:0 7px 16px rgba(15,23,42,.1)}.report-btn:hover{transform:translateY(-2px);filter:saturate(1.1)}.report-btn i{font-size:15px}.report-btn span{display:flex;flex-direction:column;text-align:left;font-size:10px;line-height:1.1;font-weight:900}.report-btn small{font-size:7.5px;font-weight:650;opacity:.72;margin-top:3px}.report-btn.list{background:linear-gradient(135deg,#11885e,#12ad75)}.report-btn.sale{background:linear-gradient(135deg,#7d113d,#c01055)}
+.filter-console{margin:0 18px 12px!important;padding:13px 15px!important;border-radius:18px!important;background:linear-gradient(120deg,#fff,#fbf9fc)!important;border:1px solid #e9e6ec!important;box-shadow:none!important}.filter-console:after{display:none}.filter-console-head{gap:12px}.filter-kicker{font-size:8px}.filter-console h3{font-size:13px;margin-top:2px}.filter-console p{max-width:640px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.filter-quick{gap:6px}.filter-quick button{height:32px;border-radius:9px;font-size:9.5px;padding:0 10px}.filter-quick button.active{background:#2b2130;border-color:#2b2130}.filter-quick button[data-payquick="pending"].active{background:#c91e4f;border-color:#c91e4f}.filter-quick button[data-payquick="paid"].active{background:#0b9465;border-color:#0b9465}.filter-quick .top-pending{background:#fff2f6;color:#a50044}.recovery-panel{margin-top:10px;padding-top:10px}.recovery-track{height:7px}
+.history-card>#srvMsg,.history-card>.stat-grid,.history-card>.date-tabs,.history-card>.hist-grid,.history-card>#pagination{margin-left:18px!important;margin-right:18px!important}.history-card>.stat-grid{grid-template-columns:repeat(4,1fr)!important;gap:9px!important;margin-bottom:10px!important}.history-card .stat-card{min-height:78px;padding:13px 14px!important;border:1px solid #ebe8ef!important;border-radius:16px!important;background:#fff!important;box-shadow:0 5px 15px rgba(25,17,30,.04)!important}.history-card .stat-card:before{width:3px;background:#a50044}.history-card .stat-card small{color:#958e9b;font-size:8.5px!important;letter-spacing:1.05px}.history-card .stat-card strong{font-size:19px!important;letter-spacing:-.5px}.history-card>.date-tabs{display:flex!important;gap:5px!important;margin-top:4px!important;margin-bottom:12px!important;padding:4px;background:#ebe9ee;border-radius:12px;width:max-content}.history-card .date-tab{height:31px!important;padding:0 14px!important;border-radius:9px!important;background:transparent!important;color:#766e7b!important;font-size:9.5px!important;box-shadow:none!important}.history-card .date-tab.active{background:#fff!important;color:#8f0e40!important;box-shadow:0 3px 10px rgba(37,23,42,.1)!important}.history-card>.hist-grid{margin-bottom:10px!important}.history-card>#pagination{padding-bottom:18px}.history-card #todayColl{margin-left:18px!important;margin-right:18px!important}
+@media(max-width:1180px){.filter-deck{grid-template-columns:minmax(220px,.8fr) minmax(0,2fr)}.filter-reports{grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr))}.report-btn{height:40px}.report-btn span{flex-direction:row;align-items:center;gap:5px}.report-btn small:before{content:"· ";}.history-heading p{display:none}}
+@media(max-width:760px){.history-card{border-radius:20px!important}.history-top{min-height:128px;padding:18px 16px 37px!important;align-items:flex-start!important}.history-mark{width:42px;height:42px;border-radius:13px;font-size:17px}.history-heading{gap:11px}.history-heading h2{font-size:19px}.history-eyebrow{font-size:7.5px;margin-bottom:5px}.history-head-actions{align-self:center}.head-action.dues{width:42px;padding:0}.head-action.dues span,.head-action.dues b{display:none}.filter-deck{grid-template-columns:1fr;gap:11px;margin:-20px 9px 10px;padding:12px;border-radius:16px}.filter-search>label,.filter-field>span{font-size:8px;margin-bottom:5px}.history-input,.history-select{height:42px!important}.filter-selects{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.filter-field:last-child{grid-column:1/-1}.filter-reports{grid-column:auto;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.report-btn{height:42px}.report-btn span{font-size:9.5px}.report-btn small{display:none}.filter-console{margin:0 9px 10px!important;padding:12px!important}.filter-console-head{display:block}.filter-console h3{font-size:12px}.filter-console p{font-size:8.5px;margin-bottom:9px}.filter-quick{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;width:100%}.filter-quick button{padding:0 4px}.filter-quick .top-pending{grid-column:span 2}.filter-quick .clear-filter{width:auto}.recovery-panel{grid-template-columns:auto 1fr}.recovery-copy strong{font-size:16px}.recovery-lead{grid-column:1/-1}.history-card>#srvMsg,.history-card>.stat-grid,.history-card>.date-tabs,.history-card>.hist-grid,.history-card>#pagination{margin-left:9px!important;margin-right:9px!important}.history-card>.stat-grid{grid-template-columns:repeat(2,1fr)!important;gap:7px!important}.history-card .stat-card{min-height:68px;padding:10px 11px!important;border-radius:13px!important}.history-card .stat-card strong{font-size:16px!important}.history-card>.date-tabs{width:calc(100% - 18px)!important;display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:3px!important;padding:3px!important}.history-card .date-tab{min-width:0!important;width:100%!important;padding:0 2px!important;font-size:8.5px!important}.history-card #todayColl{margin-left:9px!important;margin-right:9px!important}.history-card>#pagination{padding-bottom:12px}}
+@media(max-width:390px){.history-heading h2{font-size:17px}.history-mark{width:38px;height:38px}.history-top{padding-left:12px!important;padding-right:12px!important}.filter-selects{grid-template-columns:1fr}.filter-field:last-child{grid-column:auto}.filter-quick button{font-size:8.5px}.recovery-copy span{font-size:8px}}
+
+/* ===== PREMIUM DROPDOWNS + MOBILE CONTENT PRIORITY ===== */
+.dropdown,.customer-dropdown{
+  padding:7px;
+  background:rgba(255,255,255,.98);
+  border:1px solid rgba(var(--doc-accent-rgb,165,0,68),.16);
+  border-radius:17px;
+  box-shadow:0 22px 55px rgba(28,18,33,.16),0 4px 14px rgba(28,18,33,.08);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  scrollbar-width:thin;scrollbar-color:rgba(var(--doc-accent-rgb,165,0,68),.32) transparent;
+  transform-origin:top center;animation:jmdDropIn .16s ease-out;
+}
+.dropdown:before,.customer-dropdown:before{
+  content:"";display:block;height:3px;margin:0 5px 6px;border-radius:99px;
+  background:var(--doc-gradient,linear-gradient(135deg,#bd1558,#760032));opacity:.9;
+}
+.dropdown div,.customer-dropdown div{
+  position:relative;border:0!important;border-radius:11px;padding:11px 38px 11px 12px!important;
+  color:#332936;font-size:12.5px;line-height:1.35;transition:background .16s ease,color .16s ease,transform .16s ease;
+}
+.dropdown div+div,.customer-dropdown div+div{margin-top:3px}
+.dropdown div:after,.customer-dropdown div:after{
+  content:"\2192";position:absolute;right:13px;top:50%;transform:translateY(-50%) translateX(-4px);
+  color:var(--jmd);font-size:15px;font-weight:900;opacity:0;transition:.16s ease;
+}
+.dropdown div:hover,.dropdown div.kb-active,.customer-dropdown div:hover,.customer-dropdown div.kb-active{
+  background:var(--jmd-light)!important;color:var(--jmd)!important;transform:translateX(2px);
+}
+.dropdown div:hover:after,.dropdown div.kb-active:after,.customer-dropdown div:hover:after,.customer-dropdown div.kb-active:after{opacity:1;transform:translateY(-50%) translateX(0)}
+.dropdown small,.customer-dropdown small{display:block;margin-top:2px;font-size:9.5px!important;font-weight:800;letter-spacing:.45px;text-transform:uppercase;color:#928994!important}
+.dropdown b,.customer-dropdown b{font-weight:800}
+@keyframes jmdDropIn{from{opacity:0;transform:translateY(-6px) scale(.985)}to{opacity:1;transform:none}}
+
+/* Native select remains the data source; this layer makes every open list consistent. */
+.jmd-select{position:relative;width:100%}
+.jmd-select-native{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+.jmd-select-button{
+  width:100%;height:44px;padding:0 40px 0 13px;border:1px solid #e3e0e7;border-radius:12px;
+  background:linear-gradient(180deg,#fff,#f8f7f9);color:#302633;text-align:left;font:700 11px/1 'Plus Jakarta Sans',sans-serif;
+  cursor:pointer;position:relative;box-shadow:0 2px 7px rgba(25,17,30,.035);transition:.18s ease;
+}
+.jmd-select-button:after{content:"";position:absolute;right:14px;top:50%;width:7px;height:7px;border-right:2px solid var(--jmd);border-bottom:2px solid var(--jmd);transform:translateY(-70%) rotate(45deg);transition:.18s ease}
+.jmd-select.open .jmd-select-button{border-color:var(--jmd);background:#fff;box-shadow:0 0 0 3px var(--jmd-light)}
+.jmd-select.open .jmd-select-button:after{transform:translateY(-25%) rotate(225deg)}
+.jmd-select-menu{
+  display:none;position:absolute;z-index:10050;left:0;right:0;top:calc(100% + 7px);padding:7px;
+  border:1px solid rgba(var(--doc-accent-rgb,165,0,68),.16);border-radius:15px;background:rgba(255,255,255,.98);
+  box-shadow:0 22px 55px rgba(28,18,33,.17);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  max-height:250px;overflow:auto;animation:jmdDropIn .16s ease-out;
+}
+.jmd-select.open .jmd-select-menu,.jmd-select-menu.portal-open{display:block}
+.jmd-select-option{width:100%;min-height:39px;border:0;border-radius:10px;background:transparent;padding:0 34px 0 11px;color:#403643;text-align:left;font:700 11px/1.25 'Plus Jakarta Sans',sans-serif;cursor:pointer;position:relative;transition:.15s ease}
+.jmd-select-option:hover,.jmd-select-option.focused{background:var(--jmd-light);color:var(--jmd)}
+.jmd-select-option.selected{background:var(--doc-gradient,linear-gradient(135deg,#bd1558,#760032));color:#fff;box-shadow:0 5px 12px var(--doc-shadow,rgba(165,0,68,.24))}
+.jmd-select-option.selected:after{content:"\2713";position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:900}
+
+/* Live QR amount refresh */
+.qr-shell{position:relative;display:inline-block;border:6px solid #0f766e;border-radius:18px;padding:9px;background:#fff;box-shadow:0 12px 28px rgba(15,118,110,.20);overflow:hidden}
+.qr-live-loader{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;background:rgba(255,255,255,.92);color:#0f766e;font-size:11px;font-weight:900;letter-spacing:.7px;text-transform:uppercase;opacity:0;visibility:hidden;transition:.16s ease}
+.qr-shell.is-loading .qr-live-loader{opacity:1;visibility:visible}
+.qr-live-loader i{width:30px;height:30px;border:3px solid #bfe9df;border-top-color:#0f766e;border-radius:50%;animation:qrSpin .65s linear infinite}
+@keyframes qrSpin{to{transform:rotate(360deg)}}
+.qr-amount-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;padding:7px 16px 6px;align-items:end}
+.qr-amount-field{min-width:0}
+.qr-amount-field label{display:block;margin:0 0 5px 2px;color:#64748b;font-size:9px;font-weight:900;letter-spacing:.7px;text-transform:uppercase}
+.qr-amount-field input{height:42px!important;padding:0 12px!important;border-color:#cbd5e1!important;border-radius:11px!important}
+.qr-amount-field input.qr-invalid{border-color:#ef4444!important;box-shadow:0 0 0 3px rgba(239,68,68,.10)!important}
+
+@media(max-width:760px){
+  .history-card{display:flex;flex-direction:column}
+  .history-card>.history-top{order:1}.history-card>.filter-deck{order:2}.history-card>#srvMsg{order:3}
+  .history-card>.stat-grid{order:4}.history-card>.date-tabs{order:5}.history-card>.filter-console{order:6}
+  .history-card>.hist-grid{order:7}.history-card>#pagination{order:8}
+  .history-card>.filter-console{margin-top:2px!important;margin-bottom:12px!important}
+  .jmd-select-button{height:42px;font-size:10.5px}
+  /* Positioned from JS against its own trigger. A body-level portal prevents
+     the history card from clipping the list or making it drift on scroll. */
+  .jmd-select-menu{position:fixed;left:auto;right:auto;top:auto;bottom:auto;max-height:min(46vh,330px);border-radius:16px;padding:9px;z-index:100000;box-shadow:0 28px 80px rgba(15,10,17,.30)}
+  .jmd-select-option{min-height:46px;border-radius:12px;font-size:12px}
+  .dropdown,.customer-dropdown{left:0;right:0;width:auto;max-height:280px}
+  .qr-amount-row{grid-template-columns:minmax(0,1fr) auto;padding-left:12px;padding-right:12px}
+  .qr-amount-row #rcvBtn{grid-column:1/-1;height:40px}
+}
+</style>
 </head>
 <body data-doc-theme="invoice">
 <div id="lockScr" style="display:none">
@@ -1754,7 +1905,7 @@ select{appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:point
             <div class="row">
                 <div class="group search-wrap" style="position:relative; flex:2;">
                     <label>Media Type</label>
-                    <input type="text" id="jobSearch" placeholder="Search (e.g. Flex, Vinyl)" oninput="filterJobs(this.value)">
+                    <input type="text" id="jobSearch" placeholder="Search (e.g. Flex, Vinyl)" oninput="filterJobs(this.value)" onfocus="filterJobs(this.value)" autocomplete="off">
                     <div class="dropdown" id="jobList" style="display:none;"></div>
                 </div>
                 <div class="group">
@@ -1810,6 +1961,7 @@ select{appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:point
             </div>
 
             <button class="btn-add" onclick="addToBill()"><i class="fa-solid fa-plus-circle"></i> ADD ITEM TO INVOICE</button>
+            <button class="btn-custom wide" type="button" onclick="openCustomItem()"><i class="fa-solid fa-plus"></i> Custom Item (Delivery / Standee...)</button>
             <button class="btn-clear" onclick="clearForm()"><i class="fa-solid fa-rotate-left"></i> Clear Form</button>
 
 
@@ -1832,7 +1984,7 @@ select{appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:point
 
             <div class="card summary-actions" id="summaryActions">
             <div>
-                <div class="section-title">Invoice Item Pipeline</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;"><div class="section-title">Invoice Item Pipeline</div><button type="button" class="btn-custom" onclick="openCustomItem()"><i class="fa-solid fa-plus"></i> Custom Item</button></div>
                 <div id="billBody" class="pipe"></div>
             </div>
             <div class="row" style="margin-top:4px;">
@@ -1866,6 +2018,13 @@ select{appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:point
                 </div>
 
                 <div style="margin-top:14px;"><label style="display:block; font-size:11px; font-weight:700; color:var(--muted); margin-bottom:6px;">Discount / Round-off (₹)</label><input type="number" id="discount" placeholder="₹ 0" oninput="render()"></div>
+                <div style="margin-top:14px;">
+                    <label style="display:block; font-size:11px; font-weight:700; color:var(--muted); margin-bottom:6px;">Bill Style (Print / Download)</label>
+                    <div class="toggle" id="billStyleToggle">
+                        <button type="button" class="active" onclick="setBillStyle(0,this)">Simple (no extra lines)</button>
+                        <button type="button" onclick="setBillStyle(1,this)">With Sqft Detail</button>
+                    </div>
+                </div>
                 <div class="card-actions">
                     <button id="saveBtn" onclick="saveInvoice()"><i class="fa-solid fa-cloud-arrow-up"></i> Save</button>
                     <button class="btn-print" onclick="printInvoice()"><i class="fa-solid fa-print"></i> Print</button>
@@ -1882,33 +2041,93 @@ select{appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:point
 <div class="card history-card">
 
     <div class="history-top">
-
-        <div class="section-title">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-            Invoice History
+        <div class="history-heading">
+            <div class="history-mark"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <div>
+                <span class="history-eyebrow">BUSINESS LEDGER</span>
+                <h2>Invoice History</h2>
+                <p>Payments, production status aur customer dues — ek jagah.</p>
+            </div>
         </div>
-
-        <div class="history-actions">
-            <button id="retryBtn" class="pend-btn" style="display:none" onclick="loadInvoices()"><i class="fa-solid fa-rotate-left"></i> Retry</button>
-            <button class="pend-btn" onclick="openPending()"><i class="fa-solid fa-wallet"></i> Udhaar List</button>
-            <input type="text"
-                   id="historySearch"
-                   class="history-input"
-                   placeholder="Search customer..."
-                   oninput="renderHistory()">
-
-            <select id="historyFilter"
-                    class="history-select"
-                    onchange="renderHistory()">
-
-                <option value="all">All Status</option>
-                <option value="pending">Pending</option>
-                <option value="paid">Paid</option>
-
-            </select>
+        <div class="history-head-actions">
+            <button id="retryBtn" class="head-action retry" style="display:none" onclick="loadInvoices()"><i class="fa-solid fa-rotate-left"></i> Retry</button>
+            <button class="head-action dues" onclick="openPending()"><i class="fa-solid fa-wallet"></i><span>Udhaar List</span><b>OPEN</b></button>
         </div>
-
     </div>
+
+    <div class="filter-deck">
+        <div class="filter-search">
+            <label for="historySearch">Find customer</label>
+            <div class="search-control">
+                <i aria-hidden="true"></i>
+                <input type="text" id="historySearch" class="history-input" placeholder="Name ya mobile search karein..." oninput="renderHistory()">
+            </div>
+        </div>
+
+        <div class="filter-selects">
+            <label class="filter-field" for="historyFilter"><span>Payment</span>
+                <select id="historyFilter" class="history-select" onchange="currentPage=1;renderHistory()">
+                    <option value="all">All payments</option>
+                    <option value="pending">Pending + Partial</option>
+                    <option value="unpaid">Unpaid only</option>
+                    <option value="partial">Partially paid</option>
+                    <option value="paid">Fully paid</option>
+                </select>
+            </label>
+            <label class="filter-field" for="historyWork"><span>Production</span>
+                <select id="historyWork" class="history-select" onchange="currentPage=1;renderHistory()">
+                    <option value="all">All work status</option>
+                    <option value="designing">Designing</option>
+                    <option value="printing">Printing</option>
+                    <option value="framing">Framing</option>
+                    <option value="ready">Ready</option>
+                    <option value="delivered">Delivered</option>
+                </select>
+            </label>
+            <label class="filter-field" for="historySort"><span>Order by</span>
+                <select id="historySort" class="history-select" onchange="currentPage=1;renderHistory()">
+                    <option value="new">Newest first</option>
+                    <option value="old">Oldest first</option>
+                    <option value="pend">Highest pending</option>
+                    <option value="total">Highest sale</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="filter-reports">
+            <button class="report-btn list" onclick="shareHistoryList()"><i class="fa-brands fa-whatsapp"></i><span>Share List<small>Current filters</small></span></button>
+            <button class="report-btn sale" onclick="shareSaleReport()"><i class="fa-solid fa-chart-line"></i><span>Sale Report<small>Sales + profit</small></span></button>
+        </div>
+    </div>
+
+    <section class="filter-console" aria-label="Invoice filters and payment insights">
+        <div class="filter-console-head">
+            <div>
+                <span class="filter-kicker"><i class="fa-solid fa-list"></i> SMART SORTING</span>
+                <h3>Payment &amp; Production View</h3>
+                <p id="activeFilterText">All payments · All work status · All time</p>
+            </div>
+            <div class="filter-quick" aria-label="Quick payment filters">
+                <button type="button" data-payquick="all" class="active" onclick="setPaymentQuick('all',this)">All</button>
+                <button type="button" data-payquick="pending" onclick="setPaymentQuick('pending',this)"><i class="fa-solid fa-wallet"></i> Pending</button>
+                <button type="button" data-payquick="paid" onclick="setPaymentQuick('paid',this)"><i class="fa-solid fa-circle-check"></i> Paid</button>
+                <button type="button" class="top-pending" onclick="showTopPending()"><i class="fa-solid fa-chart-line"></i> Top Pending</button>
+                <button type="button" class="clear-filter" onclick="clearHistoryFilters()" title="Reset all filters"><i class="fa-solid fa-rotate-left"></i></button>
+            </div>
+        </div>
+        <div class="recovery-panel">
+            <div class="recovery-copy">
+                <span>Payment recovery</span>
+                <strong id="recoveryPercent">0%</strong>
+            </div>
+            <div class="recovery-track" aria-hidden="true"><i id="recoveryBar"></i></div>
+            <div class="recovery-lead">
+                <span>Highest pending</span>
+                <strong id="topPendingName">All clear</strong>
+                <b id="topPendingAmount">₹0</b>
+            </div>
+        </div>
+    </section>
 
     <div id="srvMsg" class="srv-msg" style="display:none"></div>
     <div class="stat-grid" id="statsGrid">
@@ -1993,7 +2212,7 @@ select{appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:point
   <div class="pb-addr"><div>Branch 2 : Shop no 10, JMD Graphics, Near Sankat Mochan Hanuman Mandir, Beside Suman Heights,<br>Lodha Heritage, Desale Pada, Dombivli East - 421 201</div></div>
   <div class="pb-cl">Client : <span id="printClient" style="margin-left:8px"></span></div>
   <div class="pb-tbl">
-    <div class="pb-th"><div>ITEM DESCRIPTION</div><div>QTY</div><div>AMOUNT</div></div>
+    <div class="pb-th"><div>ITEM DESCRIPTION</div><div>QTY</div><div>RATE</div><div>AMOUNT</div></div>
     <div id="printItems"></div>
   </div>
   <div class="pb-bot">
@@ -4461,7 +4680,8 @@ let items = [], currentJob = null, currentUnit = "ft", currentFinish = "Print";
 let existingPaid = 0; let currentPays = [];
 let invoiceHistory = [];
 let currentEditId = null;
-let currentPage = 1, rowsPerPage = 5;
+let currentEditDate = null;
+let currentPage = 1; function getRPP(){ return window.innerWidth > 768 ? 8 : 5; }
 let currentDocType = "Invoice";
 let currentWorkStatus = "Designing";
 let currentDateFilter = "all";
@@ -4548,25 +4768,27 @@ function setUnit(unit, btn) {
 }
 
 // ===== JOB SEARCH =====
+function pickJob(j, category) {
+    currentJob = { ...j, category: category };
+    document.getElementById("jobSearch").value = j.name;
+    document.getElementById("jobList").style.display = "none";
+    applyMediaRules(currentJob);
+}
 function filterJobs(val) {
     const list = document.getElementById("jobList");
+    const v = (val || "").toLowerCase().trim();
     list.innerHTML = "";
-    if (!val) { list.style.display = "none"; return; }
-    list.style.display = "block";
+    let n = 0;
     for (let category in mediaData) {
-        let filtered = mediaData[category].items.filter(i => i.name.toLowerCase().includes(val.toLowerCase()));
-        filtered.forEach(j => {
+        mediaData[category].items.filter(i => !v || i.name.toLowerCase().includes(v)).forEach(j => {
             const div = document.createElement("div");
             div.innerHTML = `<b>${j.name}</b> <small style="color:var(--jmd)">(${category})</small>`;
-            div.onclick = () => {
-                currentJob = { ...j, category: category };
-                document.getElementById("jobSearch").value = j.name;
-                list.style.display = "none";
-                applyMediaRules(currentJob);
-            };
+            div.onclick = () => pickJob(j, category);
             list.appendChild(div);
+            n++;
         });
     }
+    list.style.display = n ? "block" : "none";
 }
 
 function applyMediaRules(job) {
@@ -4686,7 +4908,7 @@ function render() {
         grandTotal += Number(it.total);
         const meta = it.kind === "rate"
             ? escH(it.spec || "")
-            : `${it.width} × ${it.height} ${String(it.unit).toUpperCase()} · Roll ${it.roll}ft<br>${escH(it.finish)} · ${it.sqft} sqft`;
+            : `${it.width} × ${it.height} ${String(it.unit).toUpperCase()} · Roll ${it.roll}ft<br>${escH(it.finish)} · ${it.sqft} sqft · ₹${fmtRate(it.rate)}/sqft`;
         const ex = [it.design > 0 ? `Design ₹${it.design}` : "", it.fitting > 0 ? `Fitting ₹${it.fitting}` : ""].filter(Boolean).join(" · ");
         return `<div class="pi">
             <div class="pi-h"><div class="pi-t">${escH(it.desc)}</div><div class="pi-tot">₹${it.total}</div></div>
@@ -4756,7 +4978,7 @@ function calcFrameWoodCost(wFt, hFt, qty) {
 async function addToBill() {
     const customer = titleCase(document.getElementById("cName").value.trim());
     const mobile = document.getElementById("cMob").value.trim();
-    if (!customer || mobile.length < 10) return toastr.warning("Customer Name aur 10-digit Mobile zaroori hai!");
+    if (currentDocType === "Invoice" && (!customer || mobile.length < 10)) return toastr.warning("Customer Name aur 10-digit Mobile zaroori hai!");
     const data = calculate();
     if (!data) return toastr.error("Valid Size aur Job select karein!");
 
@@ -4773,6 +4995,7 @@ async function addToBill() {
         area_w_ft: w_ft, area_h_ft: h_ft, unit: currentUnit,
         qty: data.qty, fitting, design, finish: currentFinish,
         rate: data.rate, costRate: currentJob.cost || 0,
+        pPrint: currentJob.print, pFrame: currentJob.frame, pStick: currentJob.stick,
         sqft: data.sqft, roll: data.roll,
         total: Math.round(finalTotal)
     });
@@ -4797,7 +5020,8 @@ async function saveInvoice() {
     if (items.length === 0) return toastr.error("Bill empty!");
     const customer = titleCase(document.getElementById("cName").value.trim());
     const mobile = document.getElementById("cMob").value.trim();
-    if (!customer) return toastr.warning("Enter customer name");
+    if (currentDocType === "Quotation") { if (!clientOk()) return; }
+    else if (!customer) return toastr.warning("Enter customer name");
 
     const grandTotal = billTotal();
     let newPay = parseInt(document.getElementById("advancePaid").value) || 0;
@@ -4808,6 +5032,10 @@ async function saveInvoice() {
     if (totalPaid - existingPaid > 0) payments.push({ d: new Date().toLocaleDateString('en-GB'), a: totalPaid - existingPaid, m: document.getElementById("payMode").value });
 
     const _newId = currentEditId || Date.now();
+    // An invoice's date is its creation date. Later payment or production
+    // updates must not move an old invoice into today's ledger/date filters.
+    const _oldInvoice = currentEditId ? invoiceHistory.find(x => x.id == currentEditId) : null;
+    const _entryDate = (_oldInvoice && _oldInvoice.date) || currentEditDate || new Date().toLocaleDateString('en-GB');
     const data = {
         id: _newId,
         invoice: document.getElementById("invoiceNo").innerText,
@@ -4816,8 +5044,8 @@ async function saveInvoice() {
         status: balance > 0 ? "Pending" : "Paid",
         doctype: currentDocType,
         workstatus: currentWorkStatus, payments, discount: discVal(),
-        // Save date in a readable format (no timestamp needed)
-        items, date: new Date().toLocaleDateString('en-GB')
+        // Preserve the original creation date when updating an entry.
+        items, date: _entryDate
     };
 
     const btn = document.getElementById("saveBtn");
@@ -4838,7 +5066,7 @@ async function saveInvoice() {
         window.__invAsked = 0;
         savePayBackup(data.id, payments);
         toastr.success(currentEditId ? "Invoice Updated" : "Invoice Saved");
-        currentEditId = null; existingPaid = 0; currentPays = []; items = []; document.getElementById("discount").value = "";
+        currentEditId = null; currentEditDate = null; existingPaid = 0; currentPays = []; items = []; document.getElementById("discount").value = "";
         document.getElementById("cName").value = "";
         document.getElementById("cMob").value = "";
         document.getElementById("advancePaid").value = "";
@@ -4855,21 +5083,127 @@ async function saveInvoice() {
 }
 
 // ===== RENDER HISTORY (FIXED: badge HTML + workstatus key) =====
+// ===== HISTORY FILTER + SORT + WHATSAPP SHARE =====
+function _dtype(inv) { return inv.doctype || inv.docType || "Invoice"; }
+function _wstat(inv) { return String(inv.workstatus || inv.workStatus || "Designing").trim().toLowerCase(); }
+function _payMatch(inv, f) {
+    if (f === "all") return true;
+    const st = String(inv.status || "").toLowerCase(), adv = Number(inv.advance) || 0;
+    if (f === "pending" || f === "paid") return st === f;
+    if (f === "unpaid") return st === "pending" && adv <= 0;
+    if (f === "partial") return st === "pending" && adv > 0;
+    return true;
+}
+function getHistoryFiltered() {
+    const q = document.getElementById("historySearch").value.toLowerCase();
+    const pf = document.getElementById("historyFilter").value;
+    const wf = document.getElementById("historyWork").value;
+    const sort = document.getElementById("historySort").value;
+    const list = invoiceHistory.filter(inv =>
+        (inv.customer || "").toLowerCase().includes(q) &&
+        _payMatch(inv, pf) &&
+        (wf === "all" || _wstat(inv) === wf) &&
+        filterByDate(inv));
+    const t = inv => { const d = parseInvDate(inv.date); return d ? d.getTime() : 0; };
+    if (sort === "old") list.reverse();
+    else if (sort === "pend") list.sort((a, b) => (Number(b.balance) || 0) - (Number(a.balance) || 0));
+    else if (sort === "total") list.sort((a, b) => (Number(b.total) || 0) - (Number(a.total) || 0));
+    return list;
+}
+const _inr = n => Math.round(Number(n) || 0).toLocaleString("en-IN");
+const _PERIOD = { all: "Ab Tak", today: "Aaj", week: "Is Hafte", month: "Is Mahine" };
+
+function shareHistoryList() {
+    const pf = document.getElementById("historyFilter").value;
+    const wf = document.getElementById("historyWork").value;
+    const sort = document.getElementById("historySort").value;
+    const list = getHistoryFiltered().filter(inv => _dtype(inv) === "Invoice");
+    if (!list.length) return toastr.warning("Is filter me koi invoice nahi hai");
+
+    const map = {}, order = [];
+    list.forEach(inv => {
+        const mob = String(inv.mobile || "").replace(/\D/g, "").slice(-10);
+        const key = mob || ("n:" + String(inv.customer || "").toLowerCase());
+        let g = map[key];
+        if (!g) { g = map[key] = { name: inv.customer || "-", total: 0, paid: 0, bal: 0, tl: [], bl: [], oldest: Infinity }; order.push(g); }
+        const tt = Number(inv.total) || 0, pp = Number(inv.advance) || 0, bb = Number(inv.balance) || 0;
+        g.total += tt; g.paid += pp; g.bal += bb; g.tl.push(tt); if (bb > 0) g.bl.push(bb);
+        const d = parseInvDate(inv.date); if (d) g.oldest = Math.min(g.oldest, d.getTime());
+    });
+    let groups = order.slice();
+    if (sort === "pend") groups.sort((a, b) => b.bal - a.bal);
+    else if (sort === "total") groups.sort((a, b) => b.total - a.total);
+    else if (sort === "old") groups.sort((a, b) => a.oldest - b.oldest);
+
+    const isPaid = pf === "paid", isAll = pf === "all";
+    let title = isPaid ? "Paid Payments" : isAll ? "Payments Summary" : "Pending Payments";
+    if (pf === "unpaid") title += " (Unpaid)"; else if (pf === "partial") title += " (Partial)";
+    const tags = [];
+    if (wf !== "all") tags.push(wf.charAt(0).toUpperCase() + wf.slice(1));
+    if (currentDateFilter !== "all") tags.push(_PERIOD[currentDateFilter]);
+    let msg = `*${title}*${tags.length ? " (" + tags.join(" · ") + ")" : ""}\n\n`;
+
+    let sumT = 0, sumP = 0, sumB = 0;
+    groups.forEach((g, index) => {
+        sumT += g.total; sumP += g.paid; sumB += g.bal;
+        if (isAll) {
+            msg += `• *${g.name}* : Total ₹${_inr(g.total)}/- | Paid ₹${_inr(g.paid)}/- | ${g.bal > 0 ? "Pending ₹" + _inr(g.bal) + "/-" : "Clear"}\n`;
+        } else {
+            const amt = isPaid ? g.total : g.bal, parts = isPaid ? g.tl : g.bl;
+            const rank = sort === "pend" && !isPaid && index < 3 ? ["🥇 ", "🥈 ", "🥉 "][index] : "• ";
+            msg += `${rank}*${g.name}* : ₹${_inr(amt)}/-${parts.length > 1 ? " (" + parts.map(_inr).join(" + ") + ")" : ""}\n`;
+        }
+    });
+    msg += "=================\n";
+    if (isAll) msg += `*Total Sale: ₹${_inr(sumT)}/-*\n✅ Paid: ₹${_inr(sumP)}/-\n⏳ *Pending: ₹${_inr(sumB)}/-*`;
+    else msg += `*Total ${isPaid ? "Paid" : "Pending"}: ₹${_inr(isPaid ? sumT : sumB)}/-*`;
+    msg += `\n_${groups.length} customer${groups.length === 1 ? "" : "s"}_`;
+    window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
+}
+
+function invCost(inv) {
+    return (inv.items || []).reduce((t, it) => {
+        const mat = Math.round((it.sqft || 0) * (it.costRate || 0) * (it.qty || 1));
+        let fr = 0;
+        try { if (it.finish === "Frame") fr = calcFrameWoodCost(parseFloat(it.area_w_ft || 0), parseFloat(it.area_h_ft || 0), it.qty || 1) || 0; } catch (e) {}
+        const st = it.finish === "Stick" ? Math.round((it.sqft || 0) * (it.qty || 1)) : 0;
+        return t + mat + fr + st + (Number(it.fitting) || 0);
+    }, 0);
+}
+
+function shareSaleReport() {
+    const list = getHistoryFiltered().filter(inv => _dtype(inv) === "Invoice");
+    if (!list.length) return toastr.warning("Is period me koi sale nahi hai");
+    let sale = 0, got = 0, pend = 0, cost = 0; const cust = {};
+    list.forEach(inv => {
+        const tt = Number(inv.total) || 0;
+        sale += tt; got += Number(inv.advance) || 0; pend += Number(inv.balance) || 0; cost += invCost(inv);
+        const k = inv.customer || "-"; cust[k] = (cust[k] || 0) + tt;
+    });
+    const profit = sale - cost, margin = sale > 0 ? Math.round(profit / sale * 100) : 0;
+    const top = Object.entries(cust).sort((a, b) => b[1] - a[1])[0];
+    const per = _PERIOD[currentDateFilter];
+    const head = currentDateFilter === "today" ? "Aaj ka dhamaka" : currentDateFilter === "all" ? "Ab tak ka kamaal" : per + " ka kamaal";
+    const pf = document.getElementById("historyFilter").value, wf = document.getElementById("historyWork").value;
+    const applied = [pf !== "all" ? (pf.charAt(0).toUpperCase() + pf.slice(1)) : "", wf !== "all" ? (wf.charAt(0).toUpperCase() + wf.slice(1)) : ""].filter(Boolean);
+    const msg = `🎉🔥 *JMD Graphics – ${head}* 🔥🎉\n${applied.length ? `_${applied.join(" · ")} filter_\n` : ""}\nBhai majja aa gaya! ${per} itna kaam hua:\n\n🧾 Bills: *${list.length}*\n💰 Total Sale: *₹${_inr(sale)}/-*\n✅ Received: ₹${_inr(got)}/-\n⏳ Pending: ₹${_inr(pend)}/-\n📈 Profit (approx): *₹${_inr(profit)}/-* (${margin}%)\n` +
+        (top ? `\n🏆 Top Client: ${top[0]} – ₹${_inr(top[1])}/-\n` : "") +
+        `\nAise hi chalte raho, team ko badhai! 🚀💪🙌`;
+    window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
+}
+
 function renderHistory() {
     const body = document.getElementById("historyBody");
     const q = document.getElementById("historySearch").value.toLowerCase();
     const filter = document.getElementById("historyFilter").value;
-    const filtered = invoiceHistory.filter(inv =>
-        (inv.customer || "").toLowerCase().includes(q) &&
-        (filter === "all" || (inv.status || "").toLowerCase() === filter) &&
-        filterByDate(inv));
-    const start = (currentPage - 1) * rowsPerPage;
+    const filtered = getHistoryFiltered();
+    const start = (currentPage - 1) * getRPP();
     const WS = {
         DESIGNING: ["fa-pen-ruler", "#f3e8ff", "#7e22ce"], PRINTING: ["fa-print", "#ffedd5", "#c2410c"],
         FRAMING: ["fa-vector-square", "#fef9c3", "#a16207"], READY: ["fa-box-open", "#dbeafe", "#1d4ed8"],
         DELIVERED: ["fa-circle-check", "#d1fae5", "#047857"]
     };
-    body.innerHTML = filtered.slice(start, start + rowsPerPage).map(inv => {
+    body.innerHTML = filtered.slice(start, start + getRPP()).map(inv => {
         const ws = String(inv.workstatus || inv.workStatus || "Designing").trim().toUpperCase();
         const w = WS[ws] || ["fa-circle", "#f1f5f9", "#475569"];
         const paid = inv.status === "Paid", id = escH(inv.id), _dt = (inv.doctype || inv.docType || "Invoice"), isQuote = _dt === "Quotation";
@@ -4880,8 +5214,9 @@ function renderHistory() {
         const names = (inv.items || []).map(it => it.desc).filter(Boolean).join(", ");
         return `<div class="hc ${hcState}">
             <div class="hc-top"><span class="hc-inv"><i class="dot"></i>${escH(inv.invoice)}</span><span>${escH(formatInvDate(inv.date))}</span></div>
-            <div><div class="hc-name">${escH(inv.customer)}</div>
+            <div class="hc-nm"><div class="hc-nmL"><div class="hc-name">${escH(inv.customer)}</div>
                  <div class="hc-sub">${escH(inv.mobile || "-")} · ${(inv.items || []).length} items${names ? " · " + escH(names) : ""}</div></div>
+                 <div class="hc-mini"><b>₹${inv.total}</b><i class="fa-solid fa-chevron-down hc-chev"></i></div></div>
             <div class="hc-amt"><div><small>Total</small><b>₹${inv.total}</b></div><div><small>Paid</small><b class="g">₹${inv.advance}</b></div><div><small>Balance</small><b class="r">₹${inv.balance}</b></div></div>
             <div class="hc-pills">
                 <span class="pill st-pill"><i class="fa-solid ${stIcon}"></i> ${stLabel}</span>
@@ -4980,7 +5315,7 @@ function clearForm() {
     document.getElementById("cName").value = "";
     document.getElementById("cMob").value = "";
     document.getElementById("advancePaid").value = "";
-    items = []; currentEditId = null; existingPaid = 0; currentPays = []; document.getElementById("discount").value = "";
+    items = []; currentEditId = null; currentEditDate = null; existingPaid = 0; currentPays = []; document.getElementById("discount").value = "";
     resetJobFields(); render();
     document.getElementById("saveBtn").innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Save`;
     setNextInvoiceNumber();
@@ -4998,12 +5333,18 @@ function editPipelineItem(idx) {
 
     container.innerHTML = `
       <div class="row" style="display:flex;gap:12px;flex-wrap:wrap;">
+        <div class="group full">
+          <label style="color:var(--jmd);">Total Amount (₹) — Design/Fitting ke saath · badlo to rate apne aap nikal jayega</label>
+          <input id="editTotal" type="number" min="0" step="1" style="font-weight:800;border-color:var(--jmd);" />
+        </div>
+      </div>
+      <div class="row" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;">
         <div class="group" style="flex:1;min-width:160px;">
           <label>Qty</label>
           <input id="editQty" type="number" value="${it.qty}" min="1" step="1" />
         </div>
         <div class="group" style="flex:1;min-width:160px;">
-          <label>Rate (₹ ${it.kind === "rate" ? "per set" : "/ sqft"})</label>
+          <label>Rate (₹ ${it.kind === "rate" ? "per set" : "/ sqft"}) — auto</label>
           <input id="editRate" type="number" value="${it.rate ?? 0}" min="0" step="1" />
         </div>
       </div>
@@ -5050,43 +5391,63 @@ function editPipelineItem(idx) {
       </div>
     `;
 
-    // Update preview
-    const updatePreview = () => {
-      const qty = Math.max(1, parseInt(document.getElementById("editQty").value) || 1);
-      const rate = parseFloat(document.getElementById("editRate").value) || 0;
-      const design = parseFloat(document.getElementById("editDesign").value) || 0;
-      const fitting = parseFloat(document.getElementById("editFitting").value) || 0;
-      const finish = document.getElementById("editFinish").value;
-
-      // subtotal base: sqft * rate * qty
-      const base = baseOf(it, rate, qty);
-      let extra = design + fitting;
-
-      // For Frame/Stick, this app currently includes only design+fitting extra.
-      // So total preview uses same as addToBill (finish changes affect rate only when user picked job before).
-      // Here, we keep preview consistent with invoice item model: extra = design+fitting.
-      // If you want frame/stick wood cost recalculation later, we can extend.
-
-      const total = Math.round(base + extra);
-      document.getElementById("editTotalPreview").textContent = `₹${total}`;
+    // Update preview (source: "total" = user edited total -> rate auto-calc; otherwise rate drives total)
+    window._editExact = null;
+    const unitsOf = (q) => (it.kind === "rate" ? 1 : (Number(it.sqft) || 0)) * q;
+    const updatePreview = (source) => {
+      const g = id => document.getElementById(id);
+      const qty = Math.max(1, parseInt(g("editQty").value) || 1);
+      const design = parseFloat(g("editDesign").value) || 0;
+      const fitting = parseFloat(g("editFitting").value) || 0;
+      let rate, total;
+      if (source === "total") {
+        total = parseFloat(g("editTotal").value) || 0;
+        const u = unitsOf(qty);
+        rate = u > 0 ? Math.max(0, (total - design - fitting) / u) : 0;
+        rate = Math.round(rate * 1e6) / 1e6;
+        window._editExact = rate;
+        g("editRate").value = fmtRate(rate);
+      } else {
+        if (source === "rate") window._editExact = null;
+        rate = window._editExact != null ? window._editExact : (parseFloat(g("editRate").value) || 0);
+        total = Math.round(baseOf(it, rate, qty) + design + fitting);
+        g("editTotal").value = total;
+      }
+      g("editTotalPreview").textContent = `₹${Math.round(total)}` + (it.kind === "rate" ? "" : `  ·  ₹${fmtRate(rate)}/sqft × ${it.sqft} sqft × ${qty}`);
     };
 
-    container.addEventListener("input", (e) => {
-      if (['editQty','editRate','editDesign','editFitting','editFinish'].includes(e.target.id)) updatePreview();
-    }, { once: false });
+    container.oninput = (e) => {
+      const id = e.target.id;
+      if (id === "editTotal") updatePreview("total");
+      else if (id === "editRate") updatePreview("rate");
+      else if (['editQty','editDesign','editFitting','editFinish'].includes(id)) updatePreview("other");
+    };
 
     container.querySelectorAll("#editQty,#editRate,#editDesign,#editFitting,#editFinish").forEach(el => {
-      el.addEventListener("change", updatePreview);
+      el.addEventListener("change", () => updatePreview(el.id === "editRate" ? "rate" : "other"));
     });
 
     document.getElementById("editFinish").value = it.finish || "Print";
+    const _jr = it.kind === "rate" ? null : jobRatesOf(it);
+    if (_jr) container.querySelectorAll("#editFinishToggle button").forEach(b => {
+      const ok = b.dataset.f === "Print" || (b.dataset.f === "Frame" && _jr.hasFrame) || (b.dataset.f === "Stick" && _jr.hasStick);
+      if (!ok) b.style.opacity = "0.35";
+    });
     container.querySelectorAll("#editFinishToggle button").forEach(b => b.addEventListener("click", () => {
-      document.getElementById("editFinish").value = b.dataset.f;
+      const f = b.dataset.f;
+      if (_jr) {
+        if ((f === "Frame" && !_jr.hasFrame) || (f === "Stick" && !_jr.hasStick)) { toastr.warning("Is media par " + f + " nahi hota"); return; }
+        document.getElementById("editRate").value = _jr.print + (f === "Frame" ? _jr.frame : f === "Stick" ? _jr.stick : 0);
+        window._editExact = null;
+      } else if (it.kind !== "rate") {
+        toastr.info("Is media ka rate list mein nahi mila, rate khud badlo");
+      }
+      document.getElementById("editFinish").value = f;
       container.querySelectorAll("#editFinishToggle button").forEach(x => x.classList.toggle("active", x === b));
-      updatePreview();
+      updatePreview("rate");
     }));
     if (it.kind === "rate") { const _fr = document.getElementById("editFinish").closest(".row"); if (_fr) _fr.style.display = "none"; }
-    updatePreview();
+    updatePreview("rate");
 
     modal.style.display = "flex";
     document.body.style.overflow = "hidden";
@@ -5097,7 +5458,8 @@ function saveEditPipelineItem(idx) {
     if (!it) return;
 
     const qty = Math.max(1, parseInt(document.getElementById("editQty").value) || 1);
-    const rate = parseFloat(document.getElementById("editRate").value) || 0;
+    const rate = (window._editExact != null) ? window._editExact : (parseFloat(document.getElementById("editRate").value) || 0);
+    window._editExact = null;
     const design = parseFloat(document.getElementById("editDesign").value) || 0;
     const fitting = parseFloat(document.getElementById("editFitting").value) || 0;
     const finish = document.getElementById("editFinish").value;
@@ -5191,22 +5553,83 @@ function filterByDate(inv) {
     return true;
 }
 
+function setPaymentQuick(value, btn) {
+    document.getElementById("historyFilter").value = value;
+    document.querySelectorAll("[data-payquick]").forEach(b => b.classList.toggle("active", b === btn));
+    currentPage = 1;
+    renderHistory();
+}
+
+function showTopPending() {
+    document.getElementById("historySearch").value = "";
+    document.getElementById("historyFilter").value = "pending";
+    document.getElementById("historyWork").value = "all";
+    document.getElementById("historySort").value = "pend";
+    currentPage = 1;
+    renderHistory();
+}
+
+function clearHistoryFilters() {
+    document.getElementById("historySearch").value = "";
+    document.getElementById("historyFilter").value = "all";
+    document.getElementById("historyWork").value = "all";
+    document.getElementById("historySort").value = "new";
+    currentDateFilter = "all";
+    document.querySelectorAll('.date-tab').forEach((b, i) => b.classList.toggle('active', i === 0));
+    currentPage = 1;
+    renderHistory();
+}
+
+function syncFilterConsole(rows) {
+    const pf = document.getElementById("historyFilter").value;
+    const wf = document.getElementById("historyWork").value;
+    const sf = document.getElementById("historySort").value;
+    const q = document.getElementById("historySearch").value.trim();
+    const labels = { all: "All payments", pending: "Pending", unpaid: "Unpaid", partial: "Partial", paid: "Paid" };
+    const sorts = { new: "Newest first", old: "Oldest first", pend: "Highest pending first", total: "Highest sale first" };
+    const work = wf === "all" ? "All work status" : wf.charAt(0).toUpperCase() + wf.slice(1);
+    const bits = [labels[pf] || pf, work, _PERIOD[currentDateFilter], sorts[sf]];
+    if (q) bits.push('Search: “' + q + '”');
+    const caption = document.getElementById("activeFilterText");
+    if (caption) caption.textContent = bits.join(" · ");
+    document.querySelectorAll("[data-payquick]").forEach(b => b.classList.toggle("active", b.dataset.payquick === pf));
+
+    const invoices = rows.filter(x => _dtype(x) === "Invoice");
+    const sale = invoices.reduce((a, x) => a + (Number(x.total) || 0), 0);
+    const received = invoices.reduce((a, x) => a + (Number(x.advance) || 0), 0);
+    const percent = sale > 0 ? Math.min(100, Math.round(received / sale * 100)) : 0;
+    document.getElementById("recoveryPercent").textContent = percent + "%";
+    document.getElementById("recoveryBar").style.width = percent + "%";
+
+    const grouped = {};
+    invoices.forEach(inv => {
+        const bal = Number(inv.balance) || 0; if (bal <= 0) return;
+        const key = String(inv.mobile || "").replace(/\D/g, "").slice(-10) || ("n:" + String(inv.customer || "-").toLowerCase());
+        grouped[key] = grouped[key] || { name: inv.customer || "-", balance: 0 };
+        grouped[key].balance += bal;
+    });
+    const top = Object.values(grouped).sort((a, b) => b.balance - a.balance)[0];
+    document.getElementById("topPendingName").textContent = top ? top.name : "All clear";
+    document.getElementById("topPendingAmount").textContent = "₹" + _inr(top ? top.balance : 0);
+}
+
 function updateStats(all) {
-    const filtered = all.filter(x => (x.doctype || x.docType) !== "Quotation");
+    const filtered = all.filter(x => _dtype(x) === "Invoice");
     let revenue = filtered.reduce((a, b) => a + (Number(b.total) || 0), 0);
     let received = filtered.reduce((a, b) => a + (Number(b.advance) || 0), 0);
     let pending = filtered.reduce((a, b) => a + (Number(b.balance) || 0), 0);
-    document.getElementById("statRevenue").innerText = "₹" + revenue;
-    document.getElementById("statPending").innerText = "₹" + pending;
-    document.getElementById("statReceived").innerText = "₹" + received;
+    document.getElementById("statRevenue").innerText = "₹" + _inr(revenue);
+    document.getElementById("statPending").innerText = "₹" + _inr(pending);
+    document.getElementById("statReceived").innerText = "₹" + _inr(received);
     document.getElementById("statCount").innerText = filtered.length;
+    syncFilterConsole(all);
 }
 
 function shareWhatsApp() {
     const customer = titleCase(document.getElementById("cName").value.trim());
     const mobile = document.getElementById("cMob").value.trim();
-    if (!customer || !mobile) return toastr.warning("Customer details fill karo pehle!");
     if (items.length === 0) return toastr.warning("Koi item nahi hai!");
+    if (!clientOk()) return;
 
     let total = billTotal();
     let newPay = parseInt(document.getElementById("advancePaid").value) || 0;
@@ -5217,7 +5640,7 @@ function shareWhatsApp() {
 
     let msg = `*JMD Graphics Pro*\n${currentDocType}: ${invNo}\nClient: ${customer}\nDate: ${new Date().toLocaleDateString('en-IN')}\n\n*Items:*\n`;
     items.forEach((it, i) => {
-        msg += `${i+1}. ${it.desc} (${sizeTxt(it)}) ×${it.qty} = ₹${it.total}\n`;
+        msg += `${i+1}. ${it.desc} (${sizeTxt(it)}) ×${it.qty} @ ₹${fmtRate(it.rate)}${it.kind === "rate" ? "" : "/sqft"}${billDetail && it.kind !== "rate" ? " [" + it.sqft + " sqft]" : ""} = ₹${it.total}\n`;
     });
     msg += `${discVal() ? "\nDiscount: -₹" + discVal() : ""}\n*Total: ₹${total}*\nPaid: ₹${totalPaid}\nBalance: ₹${balance}\n\nUPI: ${UPI_ID}\nContact: Rajnish: 7738503902 | Animesh: 9867744802`;
     window.open(`https://wa.me/91${mobile}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -5225,6 +5648,7 @@ function shareWhatsApp() {
 
 function downloadInvoiceImage() {
     if (items.length === 0) return toastr.warning("Koi item nahi hai!");
+    if (currentDocType !== "Invoice" && !clientOk()) return;
     preparePrintArea();
     const el = document.getElementById("printArea");
     el.style.display = "block";
@@ -5261,13 +5685,44 @@ function preparePrintArea() {
         const isRate = it.kind === "rate";
         const u = it.unit === "in" ? "in" : "ft";
         const line = isRate ? escH(it.desc) : `${escH(it.width)}${u} x ${escH(it.height)}${u} ${escH(it.desc)}${it.finish && it.finish !== "Print" ? " - " + escH(it.finish) : ""}`;
-        const sub = [isRate ? escH(it.spec || "") : "", it.design > 0 ? `Design ${it.design}/-` : "", it.fitting > 0 ? `Fitting ${it.fitting}/-` : ""].filter(Boolean).join(" | ");
-        return `<div class="pb-row"><div class="pb-d"><span>&bull;</span><div><div>${line}</div>${sub ? `<div class="pb-sub">${sub}</div>` : ""}</div></div><div class="pb-c">${it.qty} pc</div><div class="pb-c">${it.total}/-</div></div>`;
+        const subs = [];
+        if (billDetail) {
+            if (isRate) { if (it.spec) subs.push(escH(it.spec)); }
+            else subs.push(`Roll ${escH(it.roll)}ft | ${it.sqft} sqft x ${fmtRate(it.rate)} x ${it.qty}`);
+            if (it.design > 0) subs.push(`Design ${it.design}/-`);
+            if (it.fitting > 0) subs.push(`Fitting ${it.fitting}/-`);
+        }
+        const sub = subs.join(" | ");
+        const rateTxt = isRate ? `${fmtRate(it.rate)}/-` : `${fmtRate(it.rate)}/sqft`;
+        return `<div class="pb-row"><div class="pb-d"><span>&bull;</span><div><div>${line}</div>${sub ? `<div class="pb-sub">${sub}</div>` : ""}</div></div><div class="pb-c">${it.qty} pc</div><div class="pb-c">${rateTxt}</div><div class="pb-c">${it.total}/-</div></div>`;
     }).join("");
+}
+
+// ---- Bill style + rate helpers ----
+let billDetail = 0;
+try { billDetail = localStorage.getItem("jmd_billdetail") === "1" ? 1 : 0; } catch (e) {}
+function fmtRate(n) { return String(Math.round((Number(n) || 0) * 100) / 100); }
+function setBillStyle(v, btn) {
+    billDetail = v;
+    try { localStorage.setItem("jmd_billdetail", String(v)); } catch (e) {}
+    document.querySelectorAll("#billStyleToggle button").forEach(b => b.classList.toggle("active", b === btn));
+}
+(function () {
+    const bs = document.querySelectorAll("#billStyleToggle button");
+    if (bs.length === 2) bs.forEach((b, i) => b.classList.toggle("active", i === billDetail));
+})();
+// Quotation / Draft: client details save/print time par check hote hain
+function clientOk() {
+    const n = document.getElementById("cName").value.trim();
+    const m = document.getElementById("cMob").value.trim();
+    if (!n) { toastr.warning("Customer Name daalo"); document.getElementById("cName").focus(); return false; }
+    if (m.length < 10) { toastr.warning("10-digit Mobile daalo"); document.getElementById("cMob").focus(); return false; }
+    return true;
 }
 
 function printInvoice() {
     if (items.length === 0) return toastr.warning("Koi item nahi hai!");
+    if (currentDocType !== "Invoice" && !clientOk()) return;
     preparePrintArea();
     document.getElementById("printArea").style.display = "block";
     fontsReady().then(() => document.getElementById("printQR").decode().catch(() => {})).then(() => {
@@ -5280,6 +5735,7 @@ function editInvoice(id) {
     const inv = invoiceHistory.find(x => x.id == id);
     if (!inv) return;
     currentEditId = inv.id;
+    currentEditDate = inv.date || null;
     existingPaid = parseInt(inv.advance) || 0;
     currentPays = payList(inv); document.getElementById("discount").value = inv.discount || "";
     document.getElementById("cName").value = inv.customer;
@@ -5366,7 +5822,7 @@ async function loadInvoices() {
 }
 
 function renderPagination(total) {
-    const pages = Math.ceil(total / rowsPerPage);
+    const pages = Math.ceil(total / getRPP());
     const container = document.getElementById("pagination");
     container.innerHTML = "";
     for (let i = 1; i <= pages; i++) {
@@ -5773,6 +6229,31 @@ function pendRecv(i) {
     closePending(); showQR(best);
 }
 function closeQR() { const m = document.getElementById("qrOv"); if (m) m.remove(); document.body.style.overflow = "auto"; }
+let liveQrTimer = null;
+function scheduleLiveQR(id) {
+    const input = document.getElementById("rcvAmt"), shell = document.getElementById("qrShell");
+    if (!input || !shell) return;
+    clearTimeout(liveQrTimer);
+    const amount = Number(input.value);
+    const valid = Number.isFinite(amount) && amount > 0;
+    input.classList.toggle("qr-invalid", !valid);
+    if (!valid) { shell.classList.remove("is-loading"); return; }
+    shell.classList.add("is-loading");
+    [document.getElementById("qrHeaderAmt"), document.getElementById("qrCardAmt")].forEach(el => {
+        if (el) el.textContent = "₹" + (typeof _inr === "function" ? _inr(amount) : amount);
+    });
+    liveQrTimer = setTimeout(() => refreshLiveQR(id, amount), 320);
+}
+function refreshLiveQR(id, amount) {
+    const inv = invoiceHistory.find(x => x.id == id), img = document.querySelector("#qrShell img[data-qr-image]"), shell = document.getElementById("qrShell");
+    if (!inv || !img || !shell || !(amount > 0)) return;
+    const done = () => shell.classList.remove("is-loading");
+    img.onload = done;
+    img.onerror = done;
+    img.src = makeQR(upiLink(amount, "Inv " + String(inv.invoice).replace("#", "")));
+    img.alt = "Payment QR for ₹" + amount;
+    setTimeout(done, 650);
+}
 function showQR(id) {
     const inv = invoiceHistory.find(x => x.id == id); if (!inv) return;
     closeQR();
@@ -5781,7 +6262,7 @@ function showQR(id) {
     const logoSrc = logoEl ? logoEl.src : "";
     const qrSrc = bal > 0 ? makeQR(upiLink(bal, "Inv " + String(inv.invoice).replace("#", ""))) : "";
     const qr = bal > 0
-        ? `<div style="display:inline-block;border:6px solid #0f766e;border-radius:18px;padding:9px;background:#fff;box-shadow:0 12px 28px rgba(15,118,110,.20)"><img data-qr-image src="${qrSrc}" alt="Payment QR" style="width:210px;height:210px;display:block;image-rendering:pixelated"></div>`
+        ? `<div id="qrShell" class="qr-shell"><div class="qr-live-loader" aria-live="polite"><i></i><span>Updating QR</span></div><img data-qr-image src="${qrSrc}" alt="Payment QR for ₹${bal}" style="width:210px;height:210px;display:block;image-rendering:pixelated"></div>`
         : `<div style="padding:50px 0;font-weight:800;color:#059669;font-size:20px">&#10004; Fully Paid</div>`;
     const visiblePays = pays.slice(-2);
     const ov = document.createElement("div");
@@ -5792,7 +6273,7 @@ function showQR(id) {
         <div style="display:flex;justify-content:space-between;font-size:11px;opacity:.86"><span>PAYMENT PREVIEW</span><b>${escH(formatInvDate(inv.date))}</b></div>
         <div style="font-size:18px;font-weight:800;margin:6px 0 10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.25);text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escH(inv.customer)}</div>
         <div style="display:flex;justify-content:space-between;align-items:flex-end"><div style="font-size:11px">INVOICE NO<br><b style="font-size:14px">${escH(inv.invoice)}</b></div>
-          <div style="text-align:right;font-size:11px">${bal > 0 ? "PAYABLE AMOUNT" : "TOTAL"}<br><b style="font-size:26px">&#8377;${bal > 0 ? bal : inv.total}</b></div></div>
+          <div style="text-align:right;font-size:11px">${bal > 0 ? "PAYABLE AMOUNT" : "TOTAL"}<br><b id="qrHeaderAmt" style="font-size:26px">&#8377;${bal > 0 ? bal : inv.total}</b></div></div>
       </div>
 
       <div class="qr-modal-scroll" style="flex:1;min-height:0;overflow-y:auto;background:linear-gradient(160deg,#dff8f4 0%,#e7eefc 48%,#f1e9ff 100%);padding:14px">
@@ -5804,7 +6285,7 @@ function showQR(id) {
               <div style="font-size:9px;font-weight:900;letter-spacing:1.2px;color:#64748b">CLIENT</div>
               <div style="font-size:17px;font-weight:900;color:#0f2d3d;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escH(inv.customer)}</div>
             </div>
-            ${bal > 0 ? `<div style="font-size:13px;color:#555;margin-bottom:8px">${escH(inv.invoice)} &middot; Pay <b style="color:#0f766e;font-size:18px">&#8377;${bal}</b></div>` : ""}
+            ${bal > 0 ? `<div style="font-size:13px;color:#555;margin-bottom:8px">${escH(inv.invoice)} &middot; Pay <b id="qrCardAmt" style="color:#0f766e;font-size:18px">&#8377;${bal}</b></div>` : ""}
             ${qr}
             <div style="font-size:19px;font-weight:800;color:#0f766e;margin-top:8px;font-family:Georgia,serif">Scan &amp; Pay</div>
             <div style="margin-top:6px;font-size:20px;font-weight:800;font-style:italic;color:#555;letter-spacing:1px">BHIM <span style="color:#e8731a">UPI</span></div>
@@ -5818,7 +6299,7 @@ function showQR(id) {
         <div style="padding:8px 16px 5px;font-size:11.5px"><b>Payments (₹${inv.advance} / ₹${inv.total}) · ${pays.length} baar</b>
           <div style="max-height:84px;overflow-y:auto">${pays.map((p, i) => `<div style="display:flex;align-items:center;gap:8px;border-bottom:1px solid #eee;padding:3px 0"><span style="flex:1"><b style="color:#64748b">#${i + 1}</b> · ${escH(p.d)} · ${escH(p.m)}</span><b>₹${p.a}</b><button type="button" title="Ye payment hatao" onclick="undoPay('${escH(inv.id)}',${i})" style="background:#fee2e2;color:#dc2626;border:none;border-radius:8px;width:28px;height:28px;font-weight:800;cursor:pointer">✕</button></div>`).join("") || '<div style="color:#94a3b8;padding:3px 0">Abhi koi payment nahi</div>'}</div>
         </div>
-        ${bal > 0 ? `<div style="display:flex;gap:8px;padding:6px 16px"><input id="rcvAmt" type="number" placeholder="₹ Received" value="${bal}" style="flex:1;min-width:0"><div class="mode-tg" data-for="rcvMode"><button type="button" class="on" data-v="Cash">Cash</button><button type="button" data-v="UPI">UPI</button></div><input type="hidden" id="rcvMode" value="Cash"><button id="rcvBtn" onclick="receivePay('${escH(inv.id)}')" style="background:#059669;color:#fff;border:none;border-radius:10px;padding:0 14px;font-weight:700">Receive</button></div>` : ""}
+        ${bal > 0 ? `<div class="qr-amount-row"><div class="qr-amount-field"><label for="rcvAmt">QR / Receive Amount</label><input id="rcvAmt" type="number" min="1" step="1" inputmode="numeric" placeholder="₹ Amount" value="${bal}" oninput="scheduleLiveQR('${escH(inv.id)}')"></div><div class="mode-tg" data-for="rcvMode"><button type="button" class="on" data-v="Cash">Cash</button><button type="button" data-v="UPI">UPI</button></div><input type="hidden" id="rcvMode" value="Cash"><button id="rcvBtn" onclick="receivePay('${escH(inv.id)}')" style="height:42px;background:#059669;color:#fff;border:none;border-radius:10px;padding:0 14px;font-weight:700">Receive</button></div>` : ""}
         <div style="display:flex;gap:10px;padding:8px 16px 14px">
           <button onclick="saveQRImage('${escH(inv.invoice)}',this)" style="flex:1;background:linear-gradient(135deg,#0f9f71,#087b58);color:#fff;border:none;border-radius:11px;padding:12px;font-weight:800;cursor:pointer">SAVE IMAGE</button>
           <button onclick="closeQR()" style="flex:1;background:linear-gradient(135deg,#475569,#1f2937);color:#fff;border:none;border-radius:11px;padding:12px;font-weight:800;cursor:pointer">CLOSE</button>
@@ -6081,7 +6562,7 @@ function draw(){
  var tot=items.reduce(function(a,b){return a+Number(b.total)},0);g("rfFoot").innerHTML='Invoice mein <b>'+items.length+'</b> item · <b>₹'+tot+'</b>'}
 function add(i){var r=ROWS[i];if(!r)return;
  var name=g("cName").value.trim(),mob=g("cMob").value.trim();
- if(!name||mob.length<10)return toastr.warning("Customer Name aur 10-digit Mobile zaroori hai!");
+ if(currentDocType==="Invoice"&&(!name||mob.length<10))return toastr.warning("Customer Name aur 10-digit Mobile zaroori hai!");
  items.push({kind:"rate",desc:r.desc,spec:r.spec,width:"",height:"",unit:"",roll:"",sqft:0,area_w_ft:0,area_h_ft:0,qty:1,rate:r.base,costRate:0,finish:r.finish,design:r.dz,fitting:0,total:r.base+r.dz});
  render();draw();toastr.success("Item Added!")}
 document.addEventListener("click",function(e){var m=g("rfModal");if(!m||!m.contains(e.target)&&e.target!==m)return;
@@ -6109,5 +6590,282 @@ return{open:open,close:close,getDB:function(){return DB},setDB:setDB,getApi:func
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"7f7b0fd8732c4326aae4b9d58d5c514a","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920" integrity="sha512-L0ha0OXavK/8okipN9F8BtP84dg9DUhPERbBXzwI6dgTA55d2+yweo3pn5CSFYs45/r8md2+xvUPtTdvTNRfjA==" data-cf-beacon='{"version":"2024.11.0","token":"75124c326cb447fe934cde04713ae013","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920" integrity="sha512-L0ha0OXavK/8okipN9F8BtP84dg9DUhPERbBXzwI6dgTA55d2+yweo3pn5CSFYs45/r8md2+xvUPtTdvTNRfjA==" data-cf-beacon='{"version":"2024.11.0","token":"75124c326cb447fe934cde04713ae013","r":1,"spa":2}' crossorigin="anonymous"></script>
+
+<script id="patch-js">
+// ---- media base rates for an item (used by edit modal) ----
+function jobRatesOf(it){
+  if (it.pPrint != null) return { print:+it.pPrint||0, frame:+it.pFrame||0, stick:+it.pStick||0, hasFrame:(+it.pFrame||0)>0, hasStick:(+it.pStick||0)>0 };
+  const nm = String(it.desc||"").replace(/\s*\(\d+P Joint\)\s*$/,"").trim();
+  for (const c in mediaData){
+    const j = mediaData[c].items.find(x => x.name === nm);
+    if (j) return { print:j.print, frame:j.frame, stick:j.stick, hasFrame:j.hasFrame, hasStick:j.hasStick };
+  }
+  return null;
+}
+
+// ---- Custom item (delivery, standee, etc.) ----
+function openCustomItem(){
+  const modal = document.getElementById("detailModal");
+  const body = document.getElementById("modalBody");
+  document.getElementById("modalSubTitle").textContent = "Custom Item";
+  body.innerHTML = `
+    <div class="ci-chips">${["Delivery","Standee","Installation","Transport"].map(n => `<button type="button" data-n="${n}">${n}</button>`).join("")}</div>
+    <div class="group full"><label>Item Naam</label><input id="ciName" type="text" placeholder="Jaise: Delivery" autocomplete="off"></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;">
+      <div class="group" style="flex:1;min-width:140px;"><label>Rate (₹)</label><input id="ciRate" type="number" min="0" step="1" placeholder="₹"></div>
+      <div class="group" style="flex:1;min-width:140px;"><label>Qty</label><input id="ciQty" type="number" min="1" step="1" value="1"></div>
+    </div>
+    <div class="calc-display" style="margin-top:14px;"><span style="font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Total</span><div id="ciTotal" class="formula-val" style="font-size:18px;">₹0</div></div>
+    <div style="display:flex;gap:10px;margin-top:14px;">
+      <button type="button" onclick="closeModal()" style="flex:1;background:#f8fafc;color:var(--muted);border:1.5px solid var(--border);padding:12px;border-radius:16px;font-weight:800;cursor:pointer;">Cancel</button>
+      <button type="button" onclick="saveCustomItem()" style="flex:2;background:linear-gradient(135deg,#A50044 0%,#c10052 100%);color:#fff;border:none;padding:12px;border-radius:16px;font-weight:900;cursor:pointer;"><i class="fa-solid fa-plus" style="margin-right:8px;"></i> Add to Invoice</button>
+    </div>`;
+  const upd = () => {
+    const r = parseFloat(document.getElementById("ciRate").value) || 0;
+    const q = Math.max(1, parseInt(document.getElementById("ciQty").value) || 1);
+    document.getElementById("ciTotal").textContent = "₹" + Math.round(r * q);
+  };
+  body.querySelectorAll(".ci-chips button").forEach(b => b.onclick = () => {
+    document.getElementById("ciName").value = b.dataset.n;
+    document.getElementById("ciRate").focus();
+  });
+  body.querySelectorAll("#ciRate,#ciQty").forEach(el => el.addEventListener("input", upd));
+  body.querySelectorAll("#ciName,#ciRate,#ciQty").forEach(el => el.addEventListener("keydown", e => {
+    if (e.key === "Enter") { e.preventDefault(); saveCustomItem(); }
+  }));
+  modal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+  setTimeout(() => document.getElementById("ciName").focus(), 50);
+}
+function saveCustomItem(){
+  const name = (document.getElementById("ciName").value || "").trim();
+  const rate = parseFloat(document.getElementById("ciRate").value) || 0;
+  const qty = Math.max(1, parseInt(document.getElementById("ciQty").value) || 1);
+  if (!name) return toastr.warning("Item ka naam daalo");
+  if (rate <= 0) return toastr.warning("Rate daalo");
+  items.push({ kind:"rate", desc:name, spec:"Custom", width:"", height:"", unit:"", roll:"", sqft:0, area_w_ft:0, area_h_ft:0,
+               qty, rate, costRate:0, finish:"", design:0, fitting:0, total:Math.round(rate * qty) });
+  closeModal();
+  render();
+  toastr.success("Item Added!");
+}
+
+// ---- keyboard navigation for dropdown lists ----
+function kbNav(input, list, o){
+  o = o || {};
+  let idx = -1;
+  const kids = () => Array.from(list.children);
+  const shown = () => list.style.display !== "none" && kids().length > 0;
+  const setActive = i => {
+    idx = i;
+    kids().forEach((d, k) => d.classList.toggle("kb-active", k === i));
+    const a = kids()[i]; if (a && a.scrollIntoView) a.scrollIntoView({ block:"nearest" });
+  };
+  new MutationObserver(() => setActive(o.autoFirst && kids().length ? 0 : -1)).observe(list, { childList:true });
+  const goNext = () => { const n = o.next && o.next(); if (n) n.focus(); };
+  input.addEventListener("keydown", e => {
+    if (e.key === "ArrowDown") {
+      if (!shown()) { if (o.open) o.open(); return; }
+      e.preventDefault(); setActive(Math.min(kids().length - 1, idx + 1));
+    } else if (e.key === "ArrowUp") {
+      if (!shown()) return;
+      e.preventDefault(); setActive(Math.max(0, idx - 1));
+    } else if (e.key === "Enter") {
+      if (!shown() || idx < 0) return;
+      e.preventDefault(); kids()[idx].click(); goNext();
+    } else if (e.key === "Tab" && !e.shiftKey) {
+      if (shown() && idx >= 0) { kids()[idx].click(); if (o.next) { e.preventDefault(); goNext(); } }
+    } else if (e.key === "Escape") {
+      list.style.display = "none";
+    }
+  });
+}
+kbNav(document.getElementById("jobSearch"), document.getElementById("jobList"), {
+  autoFirst:true,
+  open:() => filterJobs(document.getElementById("jobSearch").value),
+  next:() => document.getElementById("w")
+});
+(function(){
+  const cn = document.getElementById("cName");
+  const dd = cn && cn.parentElement.querySelector(".customer-dropdown");
+  if (dd) kbNav(cn, dd, { autoFirst:false,
+    next:() => document.getElementById("cMob").value.length >= 10 ? document.getElementById("jobSearch") : document.getElementById("cMob") });
+})();
+
+// ---- mobile: tap card to open/close ----
+document.getElementById("historyBody").addEventListener("click", e => {
+  if (window.innerWidth > 768) return;
+  if (e.target.closest(".hc-act")) return;
+  const c = e.target.closest(".hc"); if (!c) return;
+  const was = c.classList.contains("open");
+  document.querySelectorAll("#historyBody .hc.open").forEach(x => x.classList.remove("open"));
+  if (!was) c.classList.add("open");
+});
+
+// ---- page size follows screen size ----
+(function(){
+  let desk = window.innerWidth > 768;
+  window.addEventListener("resize", () => {
+    const d = window.innerWidth > 768;
+    if (d !== desk) { desk = d; currentPage = 1; if (typeof renderHistory === "function") renderHistory(); }
+  });
+})();
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920" integrity="sha512-L0ha0OXavK/8okipN9F8BtP84dg9DUhPERbBXzwI6dgTA55d2+yweo3pn5CSFYs45/r8md2+xvUPtTdvTNRfjA==" data-cf-beacon='{"version":"2024.11.0","token":"75124c326cb447fe934cde04713ae013","r":1,"spa":2}' crossorigin="anonymous"></script>
+<script id="premium-selects-js">
+(function enhanceDropdowns(){
+  const selects = Array.from(document.querySelectorAll("select.history-select"));
+  if (!selects.length) return;
+
+  function closeAll(except){
+    document.querySelectorAll(".jmd-select.open").forEach(function(w){
+      if (w !== except) {
+        w.classList.remove("open");
+        const b = w.querySelector(".jmd-select-button");
+        if (b) b.setAttribute("aria-expanded","false");
+        if (w._restoreSelect) w._restoreSelect();
+      }
+    });
+  }
+
+  function build(select){
+    if (select.dataset.enhanced === "true") return;
+    select.dataset.enhanced = "true";
+    select.classList.add("jmd-select-native");
+
+    const wrap = document.createElement("div");
+    wrap.className = "jmd-select";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "jmd-select-button";
+    button.setAttribute("aria-haspopup","listbox");
+    button.setAttribute("aria-expanded","false");
+    const menu = document.createElement("div");
+    menu.className = "jmd-select-menu";
+    menu.setAttribute("role","listbox");
+
+    select.parentNode.insertBefore(wrap, select);
+    wrap.appendChild(select);
+    wrap.appendChild(button);
+    wrap.appendChild(menu);
+
+    let menuHome = null;
+    function placeMenu(){
+      if (!wrap.classList.contains("open")) return;
+      if (window.innerWidth > 760) {
+        menu.style.cssText = "";
+        return;
+      }
+      const r = button.getBoundingClientRect();
+      const gap = 7;
+      const edge = 12;
+      const roomBelow = window.innerHeight - r.bottom - edge;
+      const roomAbove = r.top - edge;
+      const wanted = Math.min(330, Math.round(window.innerHeight * .46));
+      const openAbove = roomBelow < Math.min(220, wanted) && roomAbove > roomBelow;
+      const available = Math.max(150, Math.min(wanted, (openAbove ? roomAbove : roomBelow) - gap));
+      menu.style.left = Math.max(edge, r.left) + "px";
+      menu.style.width = Math.min(r.width, window.innerWidth - edge * 2) + "px";
+      menu.style.right = "auto";
+      menu.style.bottom = "auto";
+      menu.style.maxHeight = available + "px";
+      menu.style.top = (openAbove
+        ? Math.max(edge, r.top - available - gap)
+        : Math.max(edge, Math.min(window.innerHeight - edge - available, r.bottom + gap))) + "px";
+    }
+    function portalIn(){
+      if (window.innerWidth > 760 || menu.parentNode === document.body) return;
+      menuHome = document.createComment("jmd-select-menu");
+      menu.parentNode.insertBefore(menuHome, menu);
+      document.body.appendChild(menu);
+      menu.classList.add("portal-open");
+      placeMenu();
+    }
+    function portalOut(){
+      menu.classList.remove("portal-open");
+      menu.style.cssText = "";
+      if (menuHome && menuHome.parentNode) menuHome.parentNode.replaceChild(menu, menuHome);
+      menuHome = null;
+    }
+
+    let focusIndex = -1;
+    function sync(){
+      const selected = select.options[select.selectedIndex];
+      button.textContent = selected ? selected.textContent : "Select";
+      Array.from(menu.children).forEach(function(opt, i){
+        const on = select.options[i] && select.options[i].value === select.value;
+        opt.classList.toggle("selected", on);
+        opt.setAttribute("aria-selected",on ? "true" : "false");
+      });
+    }
+    function render(){
+      menu.innerHTML = "";
+      Array.from(select.options).forEach(function(option, i){
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = "jmd-select-option";
+        item.setAttribute("role","option");
+        item.textContent = option.textContent;
+        item.addEventListener("click",function(){
+          select.value = option.value;
+          select.dispatchEvent(new Event("change",{bubbles:true}));
+          sync();closeAll();button.focus();
+        });
+        menu.appendChild(item);
+      });
+      sync();
+    }
+    function setOpen(open){
+      closeAll(open ? wrap : null);
+      wrap.classList.toggle("open",open);
+      button.setAttribute("aria-expanded",open ? "true" : "false");
+      if (open) {
+        portalIn();
+        focusIndex = Math.max(0,select.selectedIndex);
+        paintFocus();
+        requestAnimationFrame(placeMenu);
+      } else {
+        portalOut();
+      }
+    }
+    function paintFocus(){
+      Array.from(menu.children).forEach(function(x,i){x.classList.toggle("focused",i === focusIndex)});
+      const current = menu.children[focusIndex];
+      if (current) current.scrollIntoView({block:"nearest"});
+    }
+    button.addEventListener("click",function(){setOpen(!wrap.classList.contains("open"))});
+    button.addEventListener("keydown",function(e){
+      if (e.key === "Escape") { setOpen(false); return; }
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();if (!wrap.classList.contains("open")) setOpen(true);
+        focusIndex = Math.max(0,Math.min(menu.children.length-1,focusIndex+(e.key === "ArrowDown" ? 1 : -1)));paintFocus();
+      } else if ((e.key === "Enter" || e.key === " ") && wrap.classList.contains("open")) {
+        e.preventDefault();if (menu.children[focusIndex]) menu.children[focusIndex].click();
+      }
+    });
+    select.addEventListener("change",sync);
+    new MutationObserver(render).observe(select,{childList:true,subtree:true});
+    wrap._syncSelect = sync;
+    wrap._closeSelect = function(){setOpen(false)};
+    wrap._placeSelect = placeMenu;
+    wrap._restoreSelect = portalOut;
+    render();
+  }
+
+  selects.forEach(build);
+  document.addEventListener("click",function(e){
+    if (!e.target.closest(".jmd-select,.jmd-select-menu")) closeAll();
+    setTimeout(function(){document.querySelectorAll(".jmd-select").forEach(function(w){if(w._syncSelect)w._syncSelect()})},0);
+  },true);
+  window.addEventListener("scroll",function(){
+    document.querySelectorAll(".jmd-select.open").forEach(function(w){if(w._placeSelect)w._placeSelect()});
+  },true);
+  window.addEventListener("resize",function(){
+    document.querySelectorAll(".jmd-select.open").forEach(function(w){if(w._closeSelect)w._closeSelect()});
+  });
+})();
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"75124c326cb447fe934cde04713ae013","r":1,"spa":2}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"75124c326cb447fe934cde04713ae013","r":1,"spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
