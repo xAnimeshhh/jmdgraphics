@@ -6805,7 +6805,38 @@ function legacyStandeeCost(it){
                          printCost:pc || 0, dbl:/double/i.test(spec), sellingPct:0, round:1 });
   return Math.round(r.cost);
 }
-function itemUnitCost(it){ return it.unitCost != null ? Number(it.unitCost) : legacyStandeeCost(it); }
+// Purane Rate Finder bills (Visiting Card / Envelope / Letterhead) jinme cost save nahi hua: item ke naam + spec se abhi ki cost list me dhundhta hai
+function legacyRateCost(it){
+  try{
+    if(!it||it.kind!=="rate"||it.unitCost!=null) return null;
+    const d=String(it.desc||""), spec=String(it.spec||""), db=RF.getDB();
+    const mm=d.match(/^(Visiting Card|Envelope|Letterhead\/Pamphlet)\s*[–-]\s*(.+)$/i); if(!mm) return null;
+    const kind=mm[1].toLowerCase(), title=mm[2].trim().toLowerCase();
+    const num=v=>(v==null||v===""||isNaN(+v))?null:+v;
+    const pn=c=>{const r=(db.Papers||[]).find(x=>x.Code===c&&x.Name);return r?String(r.Name).toLowerCase():""};
+    if(kind==="visiting card"){
+      const q=(spec.match(/(\d+)\s*cards/i)||[])[1];
+      const side=/foil both/i.test(spec)?"FBS":/both side/i.test(spec)?"BS":/single/i.test(spec)?"SS":"";
+      const fin=String(it.finish||spec.split(" · ")[1]||"").trim().toLowerCase();
+      if(!q||!side||!fin) return null;
+      const gd=(title.match(/(\d+)\s*gsm/i)||[])[1];
+      const hits=(db.VisitingCards||[]).filter(r=>String(r.Qty)===q&&String(r.Finish).trim().toLowerCase()===fin&&r[side]!=null).filter(r=>{
+        const a=String(r.Paper).split(" - "), code=a[0], gsm=(a[1]||"").replace(/\D/g,""), nm=pn(code);
+        if(gd&&gsm&&gd!==gsm) return false;
+        return (nm&&title.indexOf(nm)>=0)||title.indexOf(code.toLowerCase())===0||title.split(/\s+/)[0]===code.toLowerCase();
+      });
+      const hit=hits.find(r=>num(r[side+"Cost"])!=null);
+      return hit?num(hit[side+"Cost"]):null;
+    }
+    if(kind==="envelope"){
+      const hit=(db.Envelope||[]).find(r=>String(r.Paper).trim().toLowerCase()===title&&spec.toLowerCase().indexOf(String(r.Size).toLowerCase())>=0);
+      return hit?num(hit.RateCost):null;
+    }
+    const hit=(db.Letterhead||[]).find(r=>String(r.Paper).trim().toLowerCase()===title&&spec.toLowerCase().indexOf(String(r.Size).toLowerCase())>=0&&spec.toLowerCase().indexOf(String(r.Side).toLowerCase())>=0&&new RegExp("\\b"+r.Qty+"\\b").test(spec));
+    return hit?num(hit.RateCost):null;
+  }catch(e){return null}
+}
+function itemUnitCost(it){ if (it.unitCost != null) return Number(it.unitCost); const a = legacyStandeeCost(it); return a != null ? a : legacyRateCost(it); }
 
 // Material cost/sqft: bill me save hai to wahi, nahi to media list se naam match karke
 function itemCostRate(it){
