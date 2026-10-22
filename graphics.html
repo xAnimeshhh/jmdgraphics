@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex, nofollow, noarchive">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <script>var API_URL = "https://script.google.com/macros/s/AKfycbx-E3nS0C7_N9D-PGcQPBkuTts0tZc0Qm_iJhmFizee1651dOllUmXY0_aRG_n1nIwx/exec";</script>
+    <script>var API_URL = "https://script.google.com/macros/s/AKfycbwikkNwJMwsIO4GXy4n-kA6S7Jtukn0UWODm_TQbxBswURRKKqVYuhi5YFKA3oNWQZD/exec";</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -1846,6 +1846,39 @@ select{appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:point
   .qr-amount-row #rcvBtn{grid-column:1/-1;height:40px}
 }
 </style>
+<style>
+.sd-opts{margin:-4px 0 12px;padding:9px 10px;border:1.5px dashed rgba(165,0,68,.3);border-radius:16px;background:var(--jmd-light)}
+.sd-opts .sd-t{font-size:10px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--jmd);margin-bottom:8px}
+.sd-chips{display:flex;flex-wrap:wrap;gap:6px}
+.sd-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:999px;border:1.5px solid var(--border);background:#fff;color:var(--muted);font:800 11px 'Plus Jakarta Sans',sans-serif;cursor:pointer}
+.sd-chip .mk{font-size:10px;font-weight:900}
+.sd-chip.on{background:var(--jmd);border-color:var(--jmd);color:#fff}
+.sd-chip.off{background:#fff;border-color:#fecaca;color:#b91c1c}
+.sd-sep{height:1px;background:rgba(165,0,68,.18);margin:10px 0}
+</style>
+<style>
+</style>
+<style>
+.rm-ctg{display:inline-flex;align-items:center;gap:7px;border:1.5px solid #fcd34d;background:#fffbeb;color:#b45309;font:800 12px inherit;padding:5px 11px 5px 7px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.rm-ctg i{width:26px;height:15px;border-radius:99px;background:#d6d3d1;position:relative;display:inline-block;transition:.2s}
+.rm-ctg i::after{content:"";position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:#fff;transition:.2s}
+.rm-ctg.on{background:#f59e0b;color:#fff;border-color:#d97706}
+.rm-ctg.on i{background:#92400e}.rm-ctg.on i::after{left:13px}
+#rmModal.cm .rm-p{background:#fffbeb;box-shadow:0 0 0 4px #f59e0b,0 24px 60px rgba(120,53,15,.45)}
+#rmModal.cm .rm-h{background:linear-gradient(135deg,#b45309,#ea580c)}
+#rmModal.cm .rm-row.hd{background:#fffbeb}
+#rmModal.cm .rm-pill.on{background:linear-gradient(135deg,#d97706,#ea580c)}
+#rmModal.cm .rm-cfg{background:#fef3c7}
+#rmModal.cm .rm-row{background:#fffdf5}
+#rmModal.cm .rm-row input[readonly]{background:#f1f5f9!important;color:#64748b!important;border-color:#e2e8f0!important}
+#rmModal.cm .rm-row .x{visibility:hidden}
+.rm-split{display:flex;flex-wrap:wrap;gap:4px}
+.rm-split input{flex:1 1 0;min-width:0;width:50%}
+.rm-split .cst{border:1.5px solid #f59e0b!important;background:#fff!important;color:#9a3412;font-weight:800}
+.rm-split .cst:focus{outline:2px solid #f59e0b}
+.rm-split .pf{flex-basis:100%;font-size:9.5px;font-weight:800;color:#15803d;min-height:11px;line-height:1}
+.rm-row.hd em.sc{font-style:normal;color:#b45309;text-transform:none;font-size:9px;letter-spacing:0}
+</style>
 </head>
 <body data-doc-theme="invoice">
 <div id="lockScr" style="display:none">
@@ -1916,6 +1949,8 @@ select{appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:point
                     </div>
                 </div>
             </div>
+
+            <div id="standeeOpts" class="sd-opts" style="display:none;"></div>
 
             <div class="row">
                 <div class="group full">
@@ -4539,7 +4574,7 @@ var qrcode = function() {
 
 <div id="rmModal"><div class="rm-p">
 <div class="rm-h"><div><b>Rate Manager</b><small>Rates, products aur settings yahin se badlo</small></div><div class="rm-hb"><button class="rm-save" id="rmSave">Save</button><button class="rm-x" id="rmX"><i class="fa-solid fa-xmark"></i></button></div></div>
-<div class="rm-cfg"><span style="font-size:11.5px;color:var(--muted);font-weight:600">Yahan badla hua rate customer page aur billing dono mein aayega (ek hi Sheet).</span><button id="rmLoad">Sheet se refresh</button></div>
+<div class="rm-cfg"><span style="font-size:11.5px;color:var(--muted);font-weight:600">Yahan badla hua rate customer page aur billing dono mein aayega (ek hi Sheet).</span><button id="rmLoad">Sheet se refresh</button><button id="rmCostTg" class="rm-ctg" type="button"><i></i>Costing mode</button></div>
 <div class="rm-st" id="rmSt"></div>
 <div class="rm-pills" id="rmPills"></div>
 <div class="rm-tools"><input id="rmFlt" placeholder="Search / filter..."><button id="rmAddRow">+ Row</button><button id="rmPasteBtn">Excel se paste</button><button class="del" id="rmDelProd" style="display:none">Product hatao</button></div>
@@ -4550,7 +4585,7 @@ var qrcode = function() {
 
 <script>
 var RM=(function(){
-var BASE={VisitingCards:["Qty","Finish","Paper","SS","BS","FBS"],Envelope:["Size","Paper","Rate"],Letterhead:["Size","Side","Paper","Qty","Rate"],Media:["Category","Name","Print","Frame","Stick","Cost"],Rolls:["Category","Rolls"],Wood:["Item","Value"],Papers:["Code","Name"]};
+var BASE={VisitingCards:["Qty","Finish","Paper","SS","BS","FBS"],Envelope:["Size","Paper","Rate"],Letterhead:["Size","Side","Paper","Qty","Rate"],Media:["Category","Name","Print","Frame","Stick"],Rolls:["Category","Rolls"],Wood:["Item","Value"],Papers:["Code","Name"]};
 var NAMES={VisitingCards:"Visiting Cards",Envelope:"Envelopes",Letterhead:"Letterhead",Media:"Flex / Vinyl / Sunboard",Rolls:"Roll Widths",Wood:"Wood (Frame)",Papers:"Paper Names"};
 var TEXT={Finish:1,Paper:1,Side:1,Size:1,Name:1,Code:1,Key:1,Value:1,Item:1,Category:1,Rolls:1};
 var DB={},sheet="VisitingCards",flt="",dirty=false,deleted=[],LIM=400;
@@ -4565,13 +4600,36 @@ function val(c,v){v=String(v==null?"":v).trim();if(v===""||v==="-")return null;i
 function st(m){g("rmSt").textContent=m||""}
 function mark(d){dirty=d;g("rmSave").className="rm-save"+(d?" dirty":"");g("rmSave").textContent=d?"Save *":"Save"}
 function pills(){g("rmPills").innerHTML=sheets().map(function(s){return '<button class="rm-pill'+(s==sheet?' on':'')+'" data-s="'+esc(s)+'">'+esc(nm(s))+'</button>'}).join("")+'<button class="rm-pill add" data-s="__new">+ Naya product</button>'}
+// ---- Costing mode: har rate box ke saath cost box ----
+var costMode=false;
+var RC={VisitingCards:{SS:"SSCost",BS:"BSCost",FBS:"FBSCost"},Envelope:{Rate:"RateCost"},Letterhead:{Rate:"RateCost"},Media:{Print:"Cost"}};
+function rc(s){return RC[s]||(prod(s)?{Rate:"RateCost"}:{})}
+function xcols(s){var c=cols(s),o=[];var m=rc(s);for(var k in m){if(c.indexOf(m[k])<0)o.push(m[k])}return o}
+function idKey(s,r){var m=rc(s);return cols(s).filter(function(c){return !m[c]}).map(function(c){return String(r[c]==null?"":r[c])}).join("|")}
+function keepCosts(s,rows){var old={},ck=Object.keys(rc(s)).map(function(k){return rc(s)[k]});(DB[s]||[]).forEach(function(r){old[idKey(s,r)]=r});
+ rows.forEach(function(r){var o=old[idKey(s,r)];if(o)ck.forEach(function(c){if(r[c]==null&&o[c]!=null)r[c]=o[c]})});return rows}
+var WOODX=[
+ {k:"standee wood",item:"Standee wood rate",d:function(){return STANDEE_CFG.woodRate}},
+ {k:"standee joint",item:"Standee joints",d:function(){return STANDEE_CFG.joints}},
+ {k:"standee selling",item:"Standee selling %",d:function(){return STANDEE_CFG.sellingPct}},
+ {k:"standee round",item:"Standee round",d:function(){return STANDEE_CFG.round}},
+ {k:"stick cost",item:"Stick cost",d:function(){return STICK_COST}}];
+function seedWood(){var w=DB.Wood=DB.Wood||[];WOODX.forEach(function(x){if(!w.some(function(r){return String(r.Item||"").toLowerCase().indexOf(x.k)>=0}))w.push({Item:x.item,Value:String(x.d())})})}
+function pf(sell,cost){if(cost==null||cost===""||isNaN(+cost)||!(+sell>0))return "";var p=+sell-+cost;return (p>=0?"Profit \u20B9":"Loss \u20B9")+Math.abs(Math.round(p*100)/100)+" \u00B7 "+Math.round(p/+sell*100)+"%"}
 function grid(){
- var cs=cols(sheet),rows=DB[sheet]||(DB[sheet]=[]),q=flt.toLowerCase(),h='<div class="rm-row hd" style="--n:'+cs.length+'"><span></span>'+cs.map(function(c){return '<span>'+esc(c)+'</span>'}).join("")+'<span></span></div>',n=0,shown=0;
+ var cs=cols(sheet),rows=DB[sheet]||(DB[sheet]=[]),q=flt.toLowerCase(),m=costMode?rc(sheet):{};
+ if(sheet=="Wood")seedWood();
+ var ar=g("rmAddRow"),pb=g("rmPasteBtn");if(ar)ar.style.display=costMode?"none":"";if(pb)pb.style.display=costMode?"none":"";
+ var h='<div class="rm-row hd" style="--n:'+cs.length+'"><span></span>'+cs.map(function(c){return '<span>'+esc(c)+(m[c]?' <em class="sc">Sell | Cost</em>':'')+'</span>'}).join("")+'<span></span></div>',n=0,shown=0;
+ var wood=sheet=="Wood";
  rows.forEach(function(r,i){if(q&&cs.map(function(c){return r[c]}).join(" ").toLowerCase().indexOf(q)<0)return;n++;if(shown>=LIM)return;shown++;
-  h+='<div class="rm-row" style="--n:'+cs.length+'"><span class="n">#'+(i+1)+'</span>'+cs.map(function(c){return '<div class="rm-c"><span>'+esc(c)+'</span><input data-i="'+i+'" data-c="'+esc(c)+'" value="'+esc(r[c])+'"></div>'}).join("")+'<button class="x" data-del="'+i+'" title="Row hatao"><i class="fa-solid fa-trash-can"></i></button></div>'});
+  h+='<div class="rm-row" style="--n:'+cs.length+'"><span class="n">#'+(i+1)+'</span>'+cs.map(function(c){
+   if(m[c]){var ck=m[c];return '<div class="rm-c rm-split"><span>'+esc(c)+' \u2013 Sell | Cost</span><input class="sell" readonly tabindex="-1" value="'+esc(r[c])+'" title="Selling rate (fixed)"><input class="cst"'+(r[c]==null||r[c]===""?' readonly tabindex="-1" placeholder="-"':' placeholder="Cost"')+' type="number" step="any" inputmode="decimal" data-i="'+i+'" data-c="'+esc(ck)+'" data-sell="'+esc(r[c]==null?"":r[c])+'" value="'+esc(r[ck])+'"><small class="pf">'+pf(r[c],r[ck])+'</small></div>'}
+   var ro=costMode&&!wood?' readonly tabindex="-1"':'';
+   return '<div class="rm-c"><span>'+esc(c)+'</span><input'+ro+' data-i="'+i+'" data-c="'+esc(c)+'" value="'+esc(r[c])+'"></div>'}).join("")+'<button class="x" data-del="'+i+'" title="Row hatao"><i class="fa-solid fa-trash-can"></i></button></div>'});
  if(!n)h+='<div class="rm-empty">'+(rows.length?"Kuch nahi mila":"Abhi koi row nahi. + Row dabao ya Excel se paste karo.")+'</div>';
  else if(n>shown)h+='<div class="rm-empty">'+shown+' / '+n+' rows dikh rahe hain. Search se filter karo.</div>';
- g("rmGrid").innerHTML=h;g("rmDelProd").style.display=prod(sheet)?"":"none";g("rmPCols").textContent="Columns: "+cs.join(" | ")}
+ g("rmGrid").innerHTML=h;g("rmDelProd").style.display=prod(sheet)&&!costMode?"":"none";g("rmPCols").textContent="Columns: "+cs.join(" | ")}
 function draw(){pills();grid()}
 function load(){var api=RF.getApi();
  if(!api){DB=JSON.parse(JSON.stringify(RF.getDB()));if(!DB.Products)DB.Products=[];draw();st("Abhi built-in rates dikh rahe hain (Sheet ka URL code mein nahi hai).");return}
@@ -4579,14 +4637,14 @@ function load(){var api=RF.getApi();
  RF.fetchRates().then(function(d){if(d&&d.VisitingCards){DB=d;if(!DB.Products)DB.Products=[];RF.setDB(JSON.parse(JSON.stringify(d)));draw();st("Sheet se latest rates load ho gaye.")}else throw 0})
  .catch(function(){DB=JSON.parse(JSON.stringify(RF.getDB()));if(!DB.Products)DB.Products=[];draw();st("Sheet se load nahi hua, saved rates dikh rahe hain.")})}
 function open(){
- deleted=[];mark(false);flt="";g("rmFlt").value="";g("rmPasteBox").style.display="none";g("rmNew").style.display="none";
+ costMode=false;g("rmModal").classList.remove("cm");deleted=[];mark(false);flt="";g("rmFlt").value="";g("rmPasteBox").style.display="none";g("rmNew").style.display="none";
  g("rmModal").style.display="flex";document.body.style.overflow="hidden";sheet="VisitingCards";DB=JSON.parse(JSON.stringify(RF.getDB()));if(!DB.Products)DB.Products=[];draw();if(RF.getApi())load()}
 function close(){if(dirty&&!confirm("Unsaved badlav hain. Bina save kiye band karein?"))return;g("rmModal").style.display="none";document.body.style.overflow="auto"}
 function save(){
  var api=RF.getApi();RF.setDB(JSON.parse(JSON.stringify(DB)));
  if(!api){mark(false);toastr.success("Is device par save ho gaya. Sabko dikhane ke liye code mein Sheet URL daalna hoga.");return}
  var tok="";try{tok=localStorage.getItem("jmd_tok")||""}catch(e){}
- var tables={},columns={};sheets().forEach(function(s){tables[s]=DB[s]||[];columns[s]=cols(s)});tables.Products=DB.Products;columns.Products=["Name","Sheet","Columns"];
+ var tables={},columns={};sheets().forEach(function(s){tables[s]=DB[s]||[];columns[s]=cols(s).concat(xcols(s))});tables.Products=DB.Products;columns.Products=["Name","Sheet","Columns"];
  st("Sheet mein save ho raha hai...");g("rmSave").disabled=true;
  fetch(api,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({token:tok,tables:tables,columns:columns,deleted:deleted})})
  .then(function(r){return r.json()}).then(function(j){g("rmSave").disabled=false;if(j.ok){try{localStorage.setItem("jmd_tok",tok)}catch(e){}deleted=[];mark(false);st("Sheet mein save ho gaya. Customer page par ab naye rates dikhenge.");toastr.success("Saved to Sheet")}else{try{localStorage.removeItem("jmd_tok")}catch(e){}if(/token/i.test(j.error||"")&&!window.__rmAsked){window.__rmAsked=1;var t3=(prompt("Admin Token daalo (Code.gs wala ADMIN_TOKEN):")||"").trim();if(t3){try{localStorage.setItem("jmd_tok",t3)}catch(e){}save();return}}st("Error: "+j.error);toastr.error(j.error||"Save nahi hua")}})
@@ -4595,7 +4653,7 @@ function paste(replace){
  var cs=cols(sheet),lines=g("rmTa").value.split(/\r?\n/).filter(function(l){return l.trim()!==""});if(!lines.length)return toastr.warning("Pehle data paste karo");
  var first=lines[0].split("\t").map(function(x){return x.trim().toLowerCase()});if(first.length>=cs.length-1&&cs.every(function(c,i){return first[i]===c.toLowerCase()||i>=first.length}))lines.shift();
  var rows=lines.map(function(l){var f=l.split("\t"),o={};cs.forEach(function(c,i){o[c]=val(c,f[i])});return o});
- if(replace)DB[sheet]=rows;else DB[sheet]=(DB[sheet]||[]).concat(rows);
+ if(replace)DB[sheet]=keepCosts(sheet,rows);else DB[sheet]=(DB[sheet]||[]).concat(rows);
  g("rmTa").value="";g("rmPasteBox").style.display="none";mark(true);grid();toastr.success(rows.length+" rows "+(replace?"set hui":"jud gayi"))}
 function makeProduct(){
  var name=g("rmNName").value.trim(),cs=g("rmNCols").value.split(",").map(function(c){return c.trim()}).filter(Boolean);
@@ -4606,6 +4664,7 @@ function makeProduct(){
 document.addEventListener("click",function(e){var m=g("rmModal");if(!m||!m.contains(e.target))return;
  if(e.target===m){close();return}
  var b=e.target.closest("button");if(!b)return;
+ if(b.id=="rmCostTg"){costMode=!costMode;g("rmModal").classList.toggle("cm",costMode);b.classList.toggle("on",costMode);grid();return}
  if(b.id=="rmX"){close();return}
  if(b.id=="rmSave"){save();return}
  if(b.id=="rmLoad"){load();return}
@@ -4618,7 +4677,7 @@ document.addEventListener("click",function(e){var m=g("rmModal");if(!m||!m.conta
  if(b.dataset.s){if(b.dataset.s=="__new"){var n=g("rmNew");n.style.display=n.style.display=="block"?"none":"block";return}sheet=b.dataset.s;flt="";g("rmFlt").value="";draw();return}
  if(b.dataset.del!==undefined){(DB[sheet]||[]).splice(+b.dataset.del,1);mark(true);grid()}});
 document.addEventListener("input",function(e){var el=e.target;if(el.id=="rmFlt"){flt=el.value;grid();return}
- if(el.dataset&&el.dataset.i!==undefined&&g("rmModal").contains(el)){var r=(DB[sheet]||[])[+el.dataset.i];if(r){r[el.dataset.c]=val(el.dataset.c,el.value);mark(true)}}});
+ if(el.dataset&&el.dataset.i!==undefined&&g("rmModal").contains(el)){var r=(DB[sheet]||[])[+el.dataset.i];if(r){r[el.dataset.c]=val(el.dataset.c,el.value);mark(true);if(el.classList.contains("cst")){var sm=el.parentNode.querySelector(".pf");if(sm)sm.textContent=pf(el.dataset.sell,el.value===""?null:el.value)}}}});
 return{open:open,close:close}})();
 
 </script>
@@ -4673,6 +4732,11 @@ function rebuildMedia(db) {
         if (k.indexOf("sizes") >= 0) { const a = v.split(",").map(Number).filter(x => x > 0).sort((x, y) => x - y); if (a.length) WOOD_SIZES.splice(0, WOOD_SIZES.length, ...a); }
         else if (k.indexOf("up to") >= 0 && Number(v) > 0) WOOD_CFG.low = Number(v);
         else if (k.indexOf("above") >= 0 && Number(v) > 0) WOOD_CFG.high = Number(v);
+        else if (k.indexOf("standee wood") >= 0 && Number(v) > 0) STANDEE_CFG.woodRate = Number(v);
+        else if (k.indexOf("standee joint") >= 0 && v !== "" && Number(v) >= 0) STANDEE_CFG.joints = Number(v);
+        else if (k.indexOf("standee selling") >= 0 && v !== "" && Number(v) >= 0) STANDEE_CFG.sellingPct = Number(v);
+        else if (k.indexOf("standee round") >= 0 && v !== "" && Number(v) >= 0) STANDEE_CFG.round = Number(v);
+        else if (k.indexOf("stick cost") >= 0 && v !== "" && Number(v) >= 0) STICK_COST = Number(v);
     });
 }
 
@@ -4726,6 +4790,8 @@ function pickWoodPieces(needed) {
     return pieces;
 }
 const WOOD_CFG = { low: 5, high: 8 };
+const STANDEE_CFG = { woodRate:8, joints:40, doubleSide:true, sellingPct:108, round:10, printMedia:"Normal Flex" };
+let STICK_COST = 1;  // stick ka cost per sqft (Edit Rates > Costing se badalta hai)
 function woodRate(len) { return len <= 6 ? WOOD_CFG.low : WOOD_CFG.high; }
 
 function frameBreakdown(wIn, hIn) {
@@ -4772,6 +4838,10 @@ function pickJob(j, category) {
     currentJob = { ...j, category: category };
     document.getElementById("jobSearch").value = j.name;
     document.getElementById("jobList").style.display = "none";
+    const _ir = document.getElementById("inpRate");
+    _ir.readOnly = !!j.isStandee;
+    if (j.isStandee) _ir.value = "";
+    showStandeeOpts(!!j.isStandee);
     applyMediaRules(currentJob);
 }
 function filterJobs(val) {
@@ -4779,6 +4849,12 @@ function filterJobs(val) {
     const v = (val || "").toLowerCase().trim();
     list.innerHTML = "";
     let n = 0;
+    if (!v || "standee standy".includes(v) || v.includes("stand")) {
+        const sd = document.createElement("div");
+        sd.innerHTML = `<b>Standee</b> <small style="color:var(--jmd)">(Frame + Print)</small>`;
+        sd.onclick = () => pickJob({ name:"Standee", print:0, cost:0, frame:0, stick:0, hasFrame:false, hasStick:false, isStandee:true }, "Standee");
+        list.appendChild(sd); n++;
+    }
     for (let category in mediaData) {
         mediaData[category].items.filter(i => !v || i.name.toLowerCase().includes(v)).forEach(j => {
             const div = document.createElement("div");
@@ -4842,6 +4918,18 @@ function calculate() {
     let wFT = currentUnit === 'in' ? wInp / 12 : wInp;
     let hFT = currentUnit === 'in' ? hInp / 12 : hInp;
 
+    if (currentJob.isStandee) {
+        const sc = standeeCalc(wFT, hFT);
+        document.getElementById("inpRate").value = sc.sell;
+        document.getElementById("formula").innerHTML = `Standee <b>${wInp}×${hInp} ${currentUnit.toUpperCase()}</b>`;
+        mediaRollEl.innerHTML = `<i class="fa-solid fa-person-chalkboard"></i> Frame + Print`;
+        const _sd = { standee:true, sell:sc.sell, unitCost:Math.round(sc.cost), qty, name:`Standee ${wInp}×${hInp} ${currentUnit.toUpperCase()}`,
+                      spec:STANDEE_CFG.printMedia + (STANDEE_CFG.doubleSide ? " · Double Side" : " · Single Side") + " + Frame", sizeStr:`${wInp}×${hInp} ${currentUnit.toUpperCase()}`,
+                      sqft:0, rate:sc.sell, roll:"" };
+        updateQuote(_sd);
+        return _sd;
+    }
+
     let rolls = mediaData[currentJob.category].rolls;
     let maxRoll = Math.max(...rolls);
 
@@ -4889,6 +4977,11 @@ function updateQuote(d) {
     if (!d.rate) { el.innerHTML = '<span class="cq-h">Rate daalo, total yahin dikhega</span>'; return; }
     const design = parseFloat(document.getElementById("designCharge").value) || 0;
     const fitting = parseFloat(document.getElementById("fittingCharge").value) || 0;
+    if (d.standee) {
+        const sb = d.sell * d.qty, st = sb + Math.round(design + fitting);
+        el.innerHTML = `<div class="cq-l"><span><b>${d.name}</b> · ₹${d.sell} × ${d.qty} = ₹${sb}</span>${(design || fitting) ? `<span>${design ? "Design ₹" + design : ""}${design && fitting ? " + " : ""}${fitting ? "Fitting ₹" + fitting : ""}</span>` : ""}</div><div class="cq-t">₹${st}</div>`;
+        return;
+    }
     const base = Math.round(d.sqft * d.rate * d.qty);
     const total = base + Math.round(design + fitting);
     el.innerHTML = `<div class="cq-l"><span><b>${d.sqft} sqft</b> × ₹${d.rate} × ${d.qty} = ₹${base}</span>${(design || fitting) ? `<span>${design ? "Design ₹" + design : ""}${design && fitting ? " + " : ""}${fitting ? "Fitting ₹" + fitting : ""}</span>` : ""}</div><div class="cq-t">₹${total}</div>`;
@@ -4990,6 +5083,13 @@ async function addToBill() {
     let fitting = parseFloat(document.getElementById("fittingCharge").value) || 0;
     let finalTotal = (data.sqft * data.rate * data.qty) + design + fitting;
 
+    if (data.standee) {
+        items.push({ kind:"rate", desc:data.name, spec:data.spec, width:"", height:"", unit:"", roll:"", sqft:0, area_w_ft:0, area_h_ft:0,
+                     qty:data.qty, rate:data.sell, costRate:0, unitCost:data.unitCost, finish:"", design, fitting, total:Math.round(data.sell * data.qty + design + fitting) });
+        render(); resetJobFields(); toastr.success("Standee Added!");
+        return;
+    }
+
     items.push({
         desc: data.name, width: winp, height: hinp,
         area_w_ft: w_ft, area_h_ft: h_ft, unit: currentUnit,
@@ -5010,6 +5110,8 @@ function resetJobFields() {
     document.getElementById("h").value = "";
     document.getElementById("qty").value = "1";
     document.getElementById("jobSearch").value = "";
+    document.getElementById("inpRate").readOnly = false;
+    showStandeeOpts(false);
     document.getElementById("formula").innerHTML = "0 × 0 × ₹0";
     document.getElementById("mediaRoll").innerHTML = `<i class="fa-solid fa-scroll"></i> 0ft Roll`;
     currentJob = null;
@@ -5163,10 +5265,12 @@ function shareHistoryList() {
 
 function invCost(inv) {
     return (inv.items || []).reduce((t, it) => {
-        const mat = Math.round((it.sqft || 0) * (it.costRate || 0) * (it.qty || 1));
+        const _uc = itemUnitCost(it);
+        if (_uc != null) return t + Math.round(_uc * (it.qty || 1)) + (Number(it.fitting) || 0);
+        const mat = Math.round((it.sqft || 0) * itemCostRate(it) * (it.qty || 1));
         let fr = 0;
         try { if (it.finish === "Frame") fr = calcFrameWoodCost(parseFloat(it.area_w_ft || 0), parseFloat(it.area_h_ft || 0), it.qty || 1) || 0; } catch (e) {}
-        const st = it.finish === "Stick" ? Math.round((it.sqft || 0) * (it.qty || 1)) : 0;
+        const st = it.finish === "Stick" ? Math.round((it.sqft || 0) * STICK_COST * (it.qty || 1)) : 0;
         return t + mat + fr + st + (Number(it.fitting) || 0);
     }, 0);
 }
@@ -5862,14 +5966,15 @@ function showProfit(inv) {
     let totalRev = 0, totalCost = 0;
     let rows = inv.items.map(it => {
         let rev = it.total;
-        let matCost = Math.round((it.sqft||0) * (it.costRate||0) * (it.qty||1));
+        const _uc = itemUnitCost(it), isSd = _uc != null;
+        let matCost = isSd ? Math.round(_uc * (it.qty||1)) : Math.round((it.sqft||0) * itemCostRate(it) * (it.qty||1));
         let frameCost = 0;
-        if (it.finish === "Frame") {
+        if (!isSd && it.finish === "Frame") {
             let wFt = parseFloat(it.area_w_ft || 0);
             let hFt = parseFloat(it.area_h_ft || 0);
             frameCost = calcFrameWoodCost(wFt, hFt, it.qty || 1);
         }
-        let stickCost = it.finish === "Stick" ? Math.round((it.sqft||0) * 1 * (it.qty||1)) : 0;
+        let stickCost = it.finish === "Stick" ? Math.round((it.sqft||0) * STICK_COST * (it.qty||1)) : 0;
         let fitCost = it.fitting || 0;
         let cost = matCost + frameCost + stickCost + fitCost;
         let profit = rev - cost;
@@ -5895,7 +6000,7 @@ function showProfit(inv) {
                 <div class="kpi-card" style="background:${profit>=0?'#ecfdf5':'#fef2f2'}; border-color:${profit>=0?'#a7f3d0':'#fecaca'};"><div class="lbl" style="color:${profit>=0?'#047857':'#b91c1c'};">PROFIT</div><div class="val" style="color:${profit>=0?'#065f46':'#7f1d1d'};">₹${profit}</div></div>
             </div>
             <div class="cost-line">
-                <span class="cost-chip">Mat <b>₹${matCost}</b></span>
+                <span class="cost-chip">${isSd ? (/stand(ee|y)/i.test(it.desc || "") ? "Standee" : "Cost") : "Mat"} <b>₹${matCost}</b></span>${(it.kind === "rate" && !isSd) ? '<span class="cost-chip" style="background:#fef3c7;color:#b45309">⚠ Cost set nahi</span>' : ""}
                 ${frameCost?`<span class="cost-chip">Frame <b>₹${frameCost}</b></span>`:""}
                 ${stickCost?`<span class="cost-chip">Stick <b>₹${stickCost}</b></span>`:""}
                 ${fitCost?`<span class="cost-chip">Fit <b>₹${fitCost}</b></span>`:""}
@@ -6519,14 +6624,14 @@ function customModel(){
  cols=String(p.Columns||"").split(",").map(function(c){return c.trim()}).filter(Boolean),
  rows=(DB[sh]||[]).filter(function(r){return r.Rate!=null&&r.Rate!==""&&!isNaN(+r.Rate)}),
  dims=cols.filter(function(c){return c!="Rate"&&c!="Item"}).map(function(c){return{k:"c_"+c,f:c,t:c,num:rows.length>0&&rows.every(function(r){return r[c]!=null&&r[c]!==""&&!isNaN(+r[c])})}});
- return{R:rows.map(function(r){var o={};dims.forEach(function(d){o[d.f]=String(r[d.f]==null?"":r[d.f])});o.Paper=r.Item!=null&&r.Item!==""?String(r.Item):(dims.map(function(d){return o[d.f]}).join(" ")||p.Name||"Item");o.Rate=+r.Rate;return o}),dims:dims}}
+ return{R:rows.map(function(r){var o={};dims.forEach(function(d){o[d.f]=String(r[d.f]==null?"":r[d.f])});o.Paper=r.Item!=null&&r.Item!==""?String(r.Item):(dims.map(function(d){return o[d.f]}).join(" ")||p.Name||"Item");o.Rate=+r.Rate;o.Cost=r.RateCost;return o}),dims:dims}}
 
 function model(){
  var _c=customModel();if(_c)return _c;
- if(S.tab=="VisitingCards"){var R=[];(DB.VisitingCards||[]).forEach(function(r){["SS","BS","FBS"].forEach(function(s){if(r[s]!=null)R.push({Qty:String(r.Qty),Finish:r.Finish,Side:s,Paper:r.Paper,Rate:r[s]})})});
+ if(S.tab=="VisitingCards"){var R=[];(DB.VisitingCards||[]).forEach(function(r){["SS","BS","FBS"].forEach(function(s){if(r[s]!=null)R.push({Qty:String(r.Qty),Finish:r.Finish,Side:s,Paper:r.Paper,Rate:r[s],Cost:r[s+"Cost"]})})});
   return{R:R,dims:[{k:"vq",f:"Qty",t:"Quantity",num:1,fmt:function(v){return v+" cards"}},{k:"vf",f:"Finish",t:"Finish"},{k:"vs",f:"Side",t:"Side",seg:1,fmt:function(v){return SIDE[v]}},{k:"vp",f:"Paper",t:"Paper (optional)",opt:1,fmt:plab}]}}
- if(S.tab=="Envelope")return{R:(DB.Envelope||[]).filter(function(r){return r.Rate!=null}),dims:[{k:"es",f:"Size",t:"Size"}]};
- return{R:(DB.Letterhead||[]).filter(function(r){return r.Rate!=null}).map(function(r){return{Size:r.Size,Side:r.Side,Qty:String(r.Qty),Paper:r.Paper,Rate:r.Rate}}),dims:[{k:"ls",f:"Size",t:"Size"},{k:"lsd",f:"Side",t:"Side",seg:1},{k:"lq",f:"Qty",t:"Quantity",num:1,fmt:function(v){return v+" pcs"}}]}}
+ if(S.tab=="Envelope")return{R:(DB.Envelope||[]).filter(function(r){return r.Rate!=null}).map(function(r){return Object.assign({},r,{Cost:r.RateCost})}),dims:[{k:"es",f:"Size",t:"Size"}]};
+ return{R:(DB.Letterhead||[]).filter(function(r){return r.Rate!=null}).map(function(r){return{Size:r.Size,Side:r.Side,Qty:String(r.Qty),Paper:r.Paper,Rate:r.Rate,Cost:r.RateCost}}),dims:[{k:"ls",f:"Size",t:"Size"},{k:"lsd",f:"Side",t:"Side",seg:1},{k:"lq",f:"Qty",t:"Quantity",num:1,fmt:function(v){return v+" pcs"}}]}}
 function match(R,dims,skip){return R.filter(function(r){return dims.every(function(d){return d===skip||!S[d.k]||String(r[d.f])===S[d.k]})})}
 function enabled(R,dims,d){return uniq(match(R,dims,d).map(function(r){return String(r[d.f])}))}
 function ensure(M){for(var p=0;p<3;p++)M.dims.forEach(function(d){var ok=enabled(M.R,M.dims,d);if(d.opt){if(S[d.k]&&ok.indexOf(S[d.k])<0)S[d.k]="";return}if(ok.indexOf(S[d.k])<0)S[d.k]=ok[0]||""})}
@@ -6552,7 +6657,7 @@ function results(M){
  h+=rows.map(function(r){var vcl=r.Paper.indexOf(" - ")>0,a=r.Paper.split(" - "),code=vcl?a[0]:r.Paper.split(" ")[0],gs=vcl?a[1].replace("GSM"," GSM"):"",base=disc(r.Rate),dz=dsg(r),p=base+dz,nm=vcl?pn(a[0]):"";
   var title=vcl?(nm||a[0]):r.Paper,sb=(vcl&&nm?a[0]+" · ":"")+gs+(S.tab=="VisitingCards"&&qty?(gs?' · ':'')+inr(+(p/qty).toFixed(2))+' / card':'');
   var prod=S.tab=="VisitingCards"?"Visiting Card":S.tab=="Envelope"?"Envelope":S.tab=="Letterhead"?"Letterhead/Pamphlet":(TABS[S.tab]||"Item");
-  ROWS.push({desc:prod+" – "+title,spec:SUB,finish:S.tab=="VisitingCards"?S.vf:"",base:base,dz:dz});
+  ROWS.push({desc:prod+" – "+title,spec:SUB,finish:S.tab=="VisitingCards"?S.vf:"",base:base,dz:dz,cost:(r.Cost!=null&&r.Cost!==""&&!isNaN(+r.Cost))?+r.Cost:null});
   return '<div class="rf-row" style="--c:'+(COL[code]||"#a50044")+'"><div><b>'+esc(title)+'</b><small>'+esc(r.Sub||sb)+'</small></div><div class="rf-pr">'+inr(p)+(r.Unit?'<small><br>'+r.Unit+'</small>':'')+(dz?'<small><br>'+inr(base)+' + '+inr(dz)+' design</small>':'')+'</div>'+(S.tab=="Media"?'':'<button class="rf-add" data-add="'+(ROWS.length-1)+'">+ Add</button>')+'</div>'}).join("")||'<div class="rf-empty">Is selection ke rates available nahi hain</div>';
  return h}
 function draw(){
@@ -6563,7 +6668,7 @@ function draw(){
 function add(i){var r=ROWS[i];if(!r)return;
  var name=g("cName").value.trim(),mob=g("cMob").value.trim();
  if(currentDocType==="Invoice"&&(!name||mob.length<10))return toastr.warning("Customer Name aur 10-digit Mobile zaroori hai!");
- items.push({kind:"rate",desc:r.desc,spec:r.spec,width:"",height:"",unit:"",roll:"",sqft:0,area_w_ft:0,area_h_ft:0,qty:1,rate:r.base,costRate:0,finish:r.finish,design:r.dz,fitting:0,total:r.base+r.dz});
+ var _it={kind:"rate",desc:r.desc,spec:r.spec,width:"",height:"",unit:"",roll:"",sqft:0,area_w_ft:0,area_h_ft:0,qty:1,rate:r.base,costRate:0,unitCost:r.cost,finish:r.finish,design:r.dz,fitting:0,total:r.base+r.dz};if(_it.unitCost==null)delete _it.unitCost;items.push(_it);
  render();draw();toastr.success("Item Added!")}
 document.addEventListener("click",function(e){var m=g("rfModal");if(!m||!m.contains(e.target)&&e.target!==m)return;
  if(e.target===m){close();return}
@@ -6577,7 +6682,14 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
 function open(){g("rfModal").style.display="flex";document.body.style.overflow="hidden";draw()}
 function close(){g("rfModal").style.display="none";document.body.style.overflow="auto"}
 function applyMedia(){if(typeof rebuildMedia=="function")rebuildMedia(DB)}
-function mergeCost(d){var old=DB.Media||[];(d.Media||[]).forEach(function(r){if(r.Cost==null||r.Cost===""){var o=old.filter(function(x){return x.Name==r.Name&&x.Category==r.Category})[0];if(o)r.Cost=o.Cost}});return d}
+function mergeCost(d){
+ var CK={VisitingCards:["SSCost","BSCost","FBSCost"],Envelope:["RateCost"],Letterhead:["RateCost"],Media:["Cost"]};
+ var ckeys=function(s){return CK[s]||(/^P_/.test(s)?["RateCost"]:[])};
+ var rid=function(s,r,ck){return s=="Media"?(r.Category+"|"+r.Name):JSON.stringify(Object.keys(r).filter(function(k){return ck.indexOf(k)<0}).sort().map(function(k){return [k,r[k]]}))};
+ Object.keys(d||{}).forEach(function(s){var ck=ckeys(s);if(!ck.length||!Array.isArray(d[s]))return;var m={};(DB[s]||[]).forEach(function(r){m[rid(s,r,ck)]=r});
+  d[s].forEach(function(r){var o=m[rid(s,r,ck)];if(o)ck.forEach(function(k){if((r[k]==null||r[k]==="")&&o[k]!=null)r[k]=o[k]})})});
+ if(Array.isArray(d.Wood)){(DB.Wood||[]).forEach(function(o){if(/standee|stick cost/i.test(String(o.Item||""))&&!d.Wood.some(function(r){return r.Item==o.Item}))d.Wood.push(o)})}
+ return d}
 function fetchRates(){if(!API_URL)return Promise.reject();var tok="";try{tok=localStorage.getItem("jmd_tok")||""}catch(e){}
  var get=function(){return fetch(API_URL).then(function(r){return r.json()})};
  return fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"read",token:tok})}).then(function(r){return r.json()}).then(function(d){if(d&&d.ok===false){try{localStorage.removeItem("jmd_tok")}catch(e){}return get().then(mergeCost)}return d}).catch(function(){return get().then(mergeCost)})}
@@ -6649,6 +6761,79 @@ function saveCustomItem(){
   render();
   toastr.success("Item Added!");
 }
+
+
+// ---- Standee (job type) : auto calc, costing hidden ----
+// Internal settings (customer ko kuch nahi dikhta). Selling = Total Cost + (Total Cost x SELLING_PCT / 100)
+function standeePrintCost(){
+  for (const c in mediaData){ const j = mediaData[c].items.find(x => x.name === STANDEE_CFG.printMedia); if (j) return j.cost || 0; }
+  return 0;
+}
+function standyCalc(o){
+  let wood = 0;
+  const add = (need, qty) => pickWoodPieces(need).forEach(p => { wood += p * qty * o.woodRate; });
+  add(o.H + 8/12, 2);   // 2 side uprights
+  add(o.W, 1);          // top bar
+  add(o.W, 1);          // bottom bar
+  add(3, 1);            // base 2 x 18in
+  const print = o.W * o.H * o.printCost * (o.dbl ? 2 : 1);
+  const cost = wood + o.joints + print;
+  const sellRaw = cost + (cost * o.sellingPct / 100);
+  const step = o.round > 0 ? o.round : 1;
+  return { cost, sell: Math.round(sellRaw / step) * step };
+}
+function standeeCalc(wFT, hFT){
+  const W = Math.min(wFT, hFT), H = Math.max(wFT, hFT);   // chhota = width, bada = height
+  return standyCalc({ W, H, woodRate:STANDEE_CFG.woodRate, joints:STANDEE_CFG.joints, printCost:standeePrintCost(),
+                      dbl:STANDEE_CFG.doubleSide, sellingPct:STANDEE_CFG.sellingPct, round:STANDEE_CFG.round });
+}
+
+
+// Purane Standee/Standy bills (jinme cost save nahi hua) ka cost size + spec se dobara nikalta hai
+function legacyStandeeCost(it){
+  if (!it || it.kind !== "rate") return null;
+  const m = String(it.desc || "").match(/^Stand(?:ee|y)\s+([\d.]+)\s*[×x]\s*([\d.]+)\s*(ft|in)?/i);
+  if (!m) return null;
+  let w = parseFloat(m[1]), h = parseFloat(m[2]);
+  if (!(w > 0 && h > 0)) return null;
+  if (/^in$/i.test(m[3] || "")) { w /= 12; h /= 12; }
+  const spec = String(it.spec || "");
+  let pc = null;
+  for (const c in mediaData) mediaData[c].items.forEach(x => { if (pc === null && spec.indexOf(x.name) >= 0) pc = x.cost || 0; });
+  if (pc === null) { for (const c in mediaData) mediaData[c].items.forEach(x => { if (pc === null && x.name === "Normal Flex") pc = x.cost || 0; }); }
+  const r = standyCalc({ W:Math.min(w, h), H:Math.max(w, h), woodRate:STANDEE_CFG.woodRate, joints:STANDEE_CFG.joints,
+                         printCost:pc || 0, dbl:/double/i.test(spec), sellingPct:0, round:1 });
+  return Math.round(r.cost);
+}
+function itemUnitCost(it){ return it.unitCost != null ? Number(it.unitCost) : legacyStandeeCost(it); }
+
+// Material cost/sqft: bill me save hai to wahi, nahi to media list se naam match karke
+function itemCostRate(it){
+  if (it.costRate) return Number(it.costRate) || 0;
+  if (!it || it.kind === "rate" || !(it.sqft > 0)) return 0;
+  const name = String(it.desc || "").trim().toLowerCase();
+  let hit = null;
+  for (const c in mediaData) mediaData[c].items.forEach(x => { if (!hit && x.name.toLowerCase() === name) hit = x; });
+  return hit ? (hit.cost || 0) : 0;
+}
+const STANDEE_DEFAULT = { printMedia:"Normal Flex", doubleSide:true };
+function standeeMaterials(){
+  const src = mediaData["Flex"] ? mediaData["Flex"].items : [].concat(...Object.values(mediaData).map(c => c.items));
+  return src.map(x => x.name);
+}
+function renderStandeeOpts(){
+  const box = document.getElementById("standeeOpts");
+  const mats = standeeMaterials();
+  if (!mats.includes(STANDEE_CFG.printMedia)) STANDEE_CFG.printMedia = mats[0] || STANDEE_CFG.printMedia;
+  box.innerHTML = `<div class="sd-t">Standee Print Material</div>
+    <div class="sd-chips">${mats.map(n => `<button type="button" class="sd-chip ${n === STANDEE_CFG.printMedia ? "on" : ""}" onclick="setStandeeMat(this.dataset.n)" data-n="${escH(n)}"><span class="mk">${n === STANDEE_CFG.printMedia ? "✓" : ""}</span>${escH(n)}</button>`).join("")}</div>`;
+}
+function showStandeeOpts(on){
+  const box = document.getElementById("standeeOpts"); if (!box) return;
+  if (on) { STANDEE_CFG.printMedia = STANDEE_DEFAULT.printMedia; STANDEE_CFG.doubleSide = STANDEE_DEFAULT.doubleSide; renderStandeeOpts(); }
+  box.style.display = on ? "block" : "none";
+}
+function setStandeeMat(n){ STANDEE_CFG.printMedia = n; renderStandeeOpts(); calculate(); }
 
 // ---- keyboard navigation for dropdown lists ----
 function kbNav(input, list, o){
